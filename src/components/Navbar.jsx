@@ -45,16 +45,16 @@ const Navbar = () => {
     );
     return (
         <nav className="bg-base-100 shadow-sm">
-            <div class="navbar max-w-7xl mx-auto px-8">
-                <div class="navbar-start">
-                    <div class="dropdown">
+            <div className="navbar max-w-7xl mx-auto px-8">
+                <div className="navbar-start">
+                    <div className="dropdown">
                         <div
                             tabindex="0"
                             role="button"
-                            class="btn btn-ghost lg:hidden">
+                            className="btn btn-ghost lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                class="h-5 w-5"
+                                className="h-5 w-5"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -69,7 +69,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabindex="-1"
-                            class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
                             {links}
                         </ul>
                     </div>
@@ -107,10 +107,10 @@ const Navbar = () => {
                         </div>
                     </Link>
                 </div>
-                <div class="navbar-center hidden lg:flex">
-                    <ul class="flex flex-row gap-18">{links}</ul>
+                <div className="navbar-center hidden lg:flex">
+                    <ul className="flex flex-row gap-18">{links}</ul>
                 </div>
-                <div class="navbar-end">
+                <div className="navbar-end">
                     <Link to={"/auth/login"}>
                         <button className="text-lg text-white font-semibold bg-linear-to-r rounded-md from-[#B32346] to-[#46052D] w-30 h-10 hover:opacity-85">
                             Login

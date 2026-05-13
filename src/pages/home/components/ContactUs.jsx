@@ -19,11 +19,11 @@ const ContactUs = () => {
                         </p>
                         <div className="flex flex-col gap-7.5">
                             <div className="text-xl flex items-center gap-11">
-                                <FiPhoneCall className="text-[#46052D]" />{" "}
+                                <FiPhoneCall className="text-red-500" />{" "}
                                 <p>01891836487</p>
                             </div>
                             <div className="text-xl flex items-center gap-11">
-                                <MdOutlineMail className="text-[#46052D]" />
+                                <MdOutlineMail className="text-red-500" />
                                 <p>readydonor@donor.com</p>
                             </div>
                         </div>
