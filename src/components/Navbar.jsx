@@ -1,5 +1,4 @@
 import React from "react";
-import { BiDonateBlood } from "react-icons/bi";
 import { MdOutlineBloodtype } from "react-icons/md";
 import { Link, NavLink } from "react-router";
 
@@ -45,8 +44,8 @@ const Navbar = () => {
         </>
     );
     return (
-        <nav>
-            <div class="navbar bg-base-100 shadow-sm px-5">
+        <nav className="bg-base-100 shadow-sm">
+            <div class="navbar max-w-7xl mx-auto px-8">
                 <div class="navbar-start">
                     <div class="dropdown">
                         <div

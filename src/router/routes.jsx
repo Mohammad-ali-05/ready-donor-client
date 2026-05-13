@@ -6,6 +6,7 @@ import Funding from "../pages/funding/Funding";
 import FindDonor from "../pages/findDonor/FindDonor";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/auth/login/Login";
+import Register from "../pages/auth/register/Register";
 
 const routes = createBrowserRouter([
     {
@@ -41,6 +42,10 @@ const routes = createBrowserRouter([
             {
                 path: "login",
                 element: <Login></Login>,
+            },
+            {
+                path: "register",
+                element: <Register></Register>,
             },
         ],
     },
