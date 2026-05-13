@@ -25,7 +25,7 @@ const Banner = () => {
                                 Blood Donation
                             </span>
                         </h1>
-                        <p className="text-lg text-gray-700 mb-8">
+                        <p className="text-lg text-gray-700 font-medium mb-8">
                             Every donation can save up to three lives. Join our
                             community of heroes and make a different tomorrow.
                             Your blood donation could be someone's second chance
