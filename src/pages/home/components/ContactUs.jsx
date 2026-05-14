@@ -11,18 +11,18 @@ const ContactUs = () => {
                         <h2 className="text-4xl md:text-5xl text-center lg:text-left font-bold mb-6">
                             Contact Us
                         </h2>
-                        <p className="text-xl text-gray-700 font-medium mb-8">
+                        <p className="text-lg text-gray-700 font-medium mb-8">
                             A single donor can become someone’s hero. Reach out
                             to us anytime for support, donation guidance, or
                             emergency assistance. Together, we can make a
                             difference.
                         </p>
-                        <div className="flex flex-col gap-7.5">
-                            <div className="text-xl flex items-center gap-11">
+                        <div className="flex flex-col gap-4">
+                            <div className="text-lg flex items-center gap-11">
                                 <FiPhoneCall className="text-red-500" />{" "}
                                 <p>01891836487</p>
                             </div>
-                            <div className="text-xl flex items-center gap-11">
+                            <div className="text-lg flex items-center gap-11">
                                 <MdOutlineMail className="text-red-500" />
                                 <p>readydonor@donor.com</p>
                             </div>

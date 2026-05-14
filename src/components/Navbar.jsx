@@ -44,8 +44,8 @@ const Navbar = () => {
         </>
     );
     return (
-        <nav className="bg-base-100 shadow-sm">
-            <div className="navbar max-w-7xl mx-auto px-8">
+        <nav className="navbar bg-base-100 shadow-md p-0">
+            <div className="flex justify-between items-center max-w-7xl w-full mx-auto px-8">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div
@@ -112,7 +112,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-end">
                     <Link to={"/auth/login"}>
-                        <button className="text-lg text-white font-semibold bg-linear-to-r rounded-md from-[#B32346] to-[#46052D] w-30 h-10 hover:opacity-85">
+                        <button className="text-lg text-white font-semibold  rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] w-30 h-10 hover:opacity-85">
                             Login
                         </button>
                     </Link>

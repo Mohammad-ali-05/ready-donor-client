@@ -1,4 +1,5 @@
 import React from "react";
+import { MdOutlineBloodtype } from "react-icons/md";
 import { Link } from "react-router";
 
 const Footer = () => {
@@ -8,23 +9,39 @@ const Footer = () => {
                 <div className="grid md:grid-cols-4 gap-8">
                     <div>
                         <div className="flex items-center gap-2 mb-4">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                className="lucide lucide-heart h-6 w-6 text-red-500"
-                                aria-hidden="true">
-                                <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"></path>
-                            </svg>
-                            <h3 className="text-xl font-semibold">
-                                Ready Donor
-                            </h3>
+                            <Link to={"/home"}>
+                                <div className="flex justify-center items-center">
+                                    <div>
+                                        <svg width="0" height="0">
+                                            <defs>
+                                                <linearGradient
+                                                    id="gradient"
+                                                    x1="0%"
+                                                    y1="0%"
+                                                    x2="100%"
+                                                    y2="100%">
+                                                    <stop
+                                                        offset="0%"
+                                                        stopColor="#B32346"
+                                                    />
+                                                    <stop
+                                                        offset="100%"
+                                                        stopColor="#46052D"
+                                                    />
+                                                </linearGradient>
+                                            </defs>
+                                        </svg>
+                                        <MdOutlineBloodtype
+                                            size={45}
+                                            style={{ fill: "url(#gradient)" }}
+                                        />
+                                    </div>
+                                    <div className="text-[17px] flex flex-col font-black bg-linear-to-br from-[#B32346] to-[#46052D] bg-clip-text text-transparent -ml-1">
+                                        <p className="-mb-0.5">Ready</p>
+                                        <p className="-mt-0.5">Donor</p>
+                                    </div>
+                                </div>
+                            </Link>
                         </div>
                         <p className="text-gray-300 text-sm mb-4">
                             Connecting donors with those in need through
