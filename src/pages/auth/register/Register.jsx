@@ -1,21 +1,68 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useBloodCategory from "../../../hooks/useBloodCategory";
 import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
+import useDivision from "../../../hooks/useDivision";
+import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
-    const { user, createUser, updateUserProfile, setUser } = useAuth();
     const {
         register,
         handleSubmit,
         control,
+        setValue,
         formState: { errors },
     } = useForm();
+
+    // Data from hooks
+    const { user, createUser, updateUserProfile, setUser } = useAuth();
+    const axios = useAxios();
+    const divisionData = useDivision();
+    const bloodCategory = useBloodCategory();
+
+    // States
+    const [districts, setDistricts] = useState([]);
+    const [upazilas, setUpazilas] = useState([]);
+
+    // Observer
     const password = useWatch({
         control,
         name: "password",
     });
-    const bloodCategory = useBloodCategory();
+    const selectedDivision = useWatch({
+        control,
+        name: "division",
+    });
+    const selectedDistrict = useWatch({
+        control,
+        name: "district",
+    });
+
+    // Load districts when division changes
+    useEffect(() => {
+        if (!selectedDivision) return;
+
+        axios.get(`/district?divisionId=${selectedDivision}`).then((data) => {
+            setDistricts(data.data);
+
+            // reset lower fields
+            setUpazilas([]);
+            setValue("district", "");
+            setValue("upazila", "");
+        });
+    }, [axios, selectedDivision, setValue]);
+
+    // Load upazilas when district changes
+    useEffect(() => {
+        if (!selectedDistrict) return;
+
+        axios.get(`/upazila?districtId=${selectedDistrict}`).then((data) => {
+            setUpazilas(data.data);
+
+            // reset upazila
+            setValue("upazila", "");
+        });
+    }, [axios, selectedDistrict, setValue]);
 
     const handleFormSubmit = (data) => {
         console.log(data);
@@ -140,11 +187,13 @@ const Register = () => {
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select Division</option>
-                                <option>Dhaka</option>
-                                <option>Chattogram</option>
-                                <option>Rajshahi</option>
-                                <option>Khulna</option>
-                                <option>Sylhet</option>
+                                {divisionData.map((division) => (
+                                    <option
+                                        key={division.id}
+                                        value={division.id}>
+                                        {division.name}
+                                    </option>
+                                ))}
                             </select>
                             {errors.division && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -163,10 +212,13 @@ const Register = () => {
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select District</option>
-                                <option>Dhaka</option>
-                                <option>Comilla</option>
-                                <option>Barishal</option>
-                                <option>Rangpur</option>
+                                {districts.map((district) => (
+                                    <option
+                                        key={district.id}
+                                        value={district.id}>
+                                        {district.name}
+                                    </option>
+                                ))}
                             </select>
                             {errors.district && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -185,9 +237,11 @@ const Register = () => {
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select Upazila</option>
-                                <option>Savar</option>
-                                <option>Dhanmondi</option>
-                                <option>Mirpur</option>
+                                {upazilas.map((upazila) => (
+                                    <option key={upazila.id} value={upazila.id}>
+                                        {upazila.name}
+                                    </option>
+                                ))}
                             </select>
                             {errors.upazila && (
                                 <p className="text-red-500 text-sm mt-1">
