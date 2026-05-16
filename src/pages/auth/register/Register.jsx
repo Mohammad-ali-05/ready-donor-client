@@ -1,6 +1,6 @@
 import React from "react";
 import useBloodCategory from "../../../hooks/useBloodCategory";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 
 const Register = () => {
@@ -8,14 +8,19 @@ const Register = () => {
     const {
         register,
         handleSubmit,
-        watch,
+        control,
         formState: { errors },
     } = useForm();
+    const password = useWatch({
+        control,
+        name: "password",
+    });
     const bloodCategory = useBloodCategory();
 
     const handleFormSubmit = (data) => {
         console.log(data);
     };
+
     return (
         <section className="relative bg-linear-to-br from-red-50 to-red-100 py-20">
             <div className="max-w-7xl flex justify-center items-center mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,11 +44,23 @@ const Register = () => {
                                 Full Name *
                             </label>
                             <input
-                                {...register("name", { required: true })}
+                                {...register("name", {
+                                    required: "Name is required",
+                                    minLength: {
+                                        value: 3,
+                                        message:
+                                            "Name must be at least 3 characters",
+                                    },
+                                })}
                                 type="text"
                                 placeholder="Enter your full name"
                                 className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
                             />
+                            {errors.name && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.name.message}
+                                </p>
+                            )}
 
                             {/* email */}
                             <label
@@ -52,26 +69,48 @@ const Register = () => {
                                 Email *
                             </label>
                             <input
-                                {...register("email", { required: true })}
+                                {...register("email", {
+                                    required: "Email is required",
+                                    pattern: {
+                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                        message: "Enter a valid email",
+                                    },
+                                })}
                                 type="email"
                                 placeholder="Enter your full email"
                                 className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
                             />
+                            {errors.email && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.email.message}
+                                </p>
+                            )}
+
                             {/* image */}
                             <label className="text-sm font-medium text-gray-700">
                                 Image *
                             </label>
                             <input
-                                {...register("image", { required: true })}
+                                {...register("image", {
+                                    required: "Image is required",
+                                })}
                                 type="file"
                                 className="file-input file-input-bordered h-9 w-full bg-gray-100 border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
                             />
+                            {errors.image && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.image.message}
+                                </p>
+                            )}
+
                             {/* blood type */}
                             <label className="text-sm font-medium text-gray-700">
                                 Blood type *
                             </label>
                             <select
-                                {...register("bloodGroup", { required: true })}
+                                {...register("bloodGroup", {
+                                    required: "Blood group is required",
+                                })}
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">All Blood Types</option>
@@ -81,15 +120,23 @@ const Register = () => {
                                     </option>
                                 ))}
                             </select>
+                            {errors.bloodGroup && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.bloodGroup.message}
+                                </p>
+                            )}
                         </fieldset>
                         {/* User location */}
                         <fieldset className="fieldset">
                             {/* Division */}
+
                             <label className="text-sm font-medium text-gray-700">
                                 Division *
                             </label>
                             <select
-                                {...register("division", { required: true })}
+                                {...register("division", {
+                                    required: "Division is required",
+                                })}
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select Division</option>
@@ -99,13 +146,20 @@ const Register = () => {
                                 <option>Khulna</option>
                                 <option>Sylhet</option>
                             </select>
+                            {errors.division && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.division.message}
+                                </p>
+                            )}
 
                             {/* District */}
                             <label className="text-sm font-medium text-gray-700">
                                 District *
                             </label>
                             <select
-                                {...register("district", { required: true })}
+                                {...register("district", {
+                                    required: "District is required",
+                                })}
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select District</option>
@@ -114,13 +168,20 @@ const Register = () => {
                                 <option>Barishal</option>
                                 <option>Rangpur</option>
                             </select>
+                            {errors.district && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.district.message}
+                                </p>
+                            )}
 
                             {/* Upazila */}
                             <label className="text-sm font-medium text-gray-700">
                                 Upazila *
                             </label>
                             <select
-                                {...register("upazila", { required: true })}
+                                {...register("upazila", {
+                                    required: "Upazila is required",
+                                })}
                                 defaultValue=""
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select Upazila</option>
@@ -128,6 +189,11 @@ const Register = () => {
                                 <option>Dhanmondi</option>
                                 <option>Mirpur</option>
                             </select>
+                            {errors.upazila && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.upazila.message}
+                                </p>
+                            )}
                         </fieldset>
                         {/* User password */}
                         <fieldset className="fieldset">
@@ -138,11 +204,29 @@ const Register = () => {
                                 Password *
                             </label>
                             <input
-                                {...register("password", { required: true })}
+                                {...register("password", {
+                                    required: "Password is required",
+                                    minLength: {
+                                        value: 6,
+                                        message:
+                                            "Password must be at least 6 characters",
+                                    },
+                                    pattern: {
+                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
+                                        message:
+                                            "Password must contain uppercase, lowercase, number and special character",
+                                    },
+                                })}
                                 type="password"
                                 placeholder="Create your password"
                                 className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
                             />
+                            {errors.password && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.password.message}
+                                </p>
+                            )}
+
                             {/*Confirm Password */}
                             <label
                                 htmlFor="confirmPassword"
@@ -151,12 +235,20 @@ const Register = () => {
                             </label>
                             <input
                                 {...register("confirmPassword", {
-                                    required: true,
+                                    required: "Please confirm password",
+                                    validate: (value) =>
+                                        value === password ||
+                                        "Passwords do not match",
                                 })}
                                 type="password"
                                 placeholder="Confirm your password"
                                 className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
                             />
+                            {errors.confirmPassword && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.confirmPassword.message}
+                                </p>
+                            )}
                         </fieldset>
                         <button className="btn btn-neutral w-full mt-4">
                             Register
