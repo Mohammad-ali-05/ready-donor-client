@@ -1,8 +1,10 @@
 import React from "react";
 import useBloodCategory from "../../../hooks/useBloodCategory";
 import { useForm } from "react-hook-form";
+import useAuth from "../../../hooks/useAuth";
 
 const Register = () => {
+    const { user, createUser, updateUserProfile, setUser } = useAuth();
     const {
         register,
         handleSubmit,
