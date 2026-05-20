@@ -6,6 +6,7 @@ import useDivision from "../../../hooks/useDivision";
 import useAxios from "../../../hooks/useAxios";
 
 const Register = () => {
+    // react form hook
     const {
         register,
         handleSubmit,
@@ -15,7 +16,7 @@ const Register = () => {
     } = useForm();
 
     // Data from hooks
-    const { user, createUser, updateUserProfile, setUser } = useAuth();
+    const { auth, createUser, updateUserProfile, setUser } = useAuth();
     const axios = useAxios();
     const divisionData = useDivision();
     const bloodCategory = useBloodCategory();
@@ -42,26 +43,30 @@ const Register = () => {
     useEffect(() => {
         if (!selectedDivision) return;
 
-        axios.get(`/district?divisionId=${selectedDivision}`).then((data) => {
-            setDistricts(data.data);
+        axios
+            .get(`/district?divisionId=${selectedDivision.split(" ")[0]}`)
+            .then((data) => {
+                setDistricts(data.data);
 
-            // reset lower fields
-            setUpazilas([]);
-            setValue("district", "");
-            setValue("upazila", "");
-        });
+                // reset lower fields
+                setUpazilas([]);
+                setValue("district", "");
+                setValue("upazila", "");
+            });
     }, [axios, selectedDivision, setValue]);
 
     // Load upazilas when district changes
     useEffect(() => {
         if (!selectedDistrict) return;
 
-        axios.get(`/upazila?districtId=${selectedDistrict}`).then((data) => {
-            setUpazilas(data.data);
+        axios
+            .get(`/upazila?districtId=${selectedDistrict.split(" ")[0]}`)
+            .then((data) => {
+                setUpazilas(data.data);
 
-            // reset upazila
-            setValue("upazila", "");
-        });
+                // reset upazila
+                setValue("upazila", "");
+            });
     }, [axios, selectedDistrict, setValue]);
 
     const handleFormSubmit = (data) => {
@@ -190,7 +195,7 @@ const Register = () => {
                                 {divisionData.map((division) => (
                                     <option
                                         key={division.id}
-                                        value={division.id}>
+                                        value={`${division.id} ${division.name}`}>
                                         {division.name}
                                     </option>
                                 ))}
@@ -215,7 +220,7 @@ const Register = () => {
                                 {districts.map((district) => (
                                     <option
                                         key={district.id}
-                                        value={district.id}>
+                                        value={`${district.id} ${district.name}`}>
                                         {district.name}
                                     </option>
                                 ))}
@@ -238,7 +243,9 @@ const Register = () => {
                                 className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                                 <option value="">Select Upazila</option>
                                 {upazilas.map((upazila) => (
-                                    <option key={upazila.id} value={upazila.id}>
+                                    <option
+                                        key={upazila.id}
+                                        value={`${upazila.id} ${upazila.name}`}>
                                         {upazila.name}
                                     </option>
                                 ))}
