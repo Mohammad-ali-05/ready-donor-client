@@ -4,8 +4,13 @@ import { useForm, useWatch } from "react-hook-form";
 import useAuth from "../../../hooks/useAuth";
 import useDivision from "../../../hooks/useDivision";
 import useAxios from "../../../hooks/useAxios";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useNavigate } from "react-router";
 
 const Register = () => {
+    // react hook
+    const navigate = useNavigate();
+
     // react form hook
     const {
         register,
@@ -18,6 +23,7 @@ const Register = () => {
     // Data from hooks
     const { auth, createUser, updateUserProfile, setUser } = useAuth();
     const axios = useAxios();
+    const axiosSecure = useAxiosSecure();
     const divisionData = useDivision();
     const bloodCategory = useBloodCategory();
 
@@ -69,8 +75,76 @@ const Register = () => {
             });
     }, [axios, selectedDistrict, setValue]);
 
-    const handleFormSubmit = (data) => {
-        console.log(data);
+    const handleFormSubmit = async (data) => {
+        try {
+            const {
+                bloodGroup,
+                district,
+                division,
+                email,
+                image,
+                name,
+                password,
+                upazila,
+            } = data;
+
+            const [divisionId, divisionName] = division.split(" ");
+            const [districtId, districtName] = district.split(" ");
+            const [upazilaId, upazilaName] = upazila.split(" ");
+
+            const profileImage = image[0];
+
+            // Create Firebase user
+            const result = await createUser(email, password);
+
+            // Upload image to ImgBB
+            const formData = new FormData();
+            formData.append("image", profileImage);
+
+            const imageApiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
+
+            const imageRes = await axios.post(imageApiUrl, formData);
+
+            const imageUrl = imageRes.data.data.url;
+
+            // Update Firebase profile
+            await updateUserProfile({
+                displayName: name,
+                photoURL: imageUrl,
+            });
+
+            // Current Firebase user
+            const currentUser = result.user;
+
+            // Create user object
+            const userData = {
+                uid: currentUser.uid,
+                email: currentUser.email,
+                name,
+                image: imageUrl,
+                bloodGroup,
+                divisionName,
+                divisionId,
+                districtName,
+                districtId,
+                upazilaName,
+                upazilaId,
+                status: "active",
+                role: "donor",
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString(),
+            };
+
+            // Save to MongoDB
+            const dbRes = await axiosSecure.post("/user", userData);
+
+            if (dbRes.data.insertedId) {
+                navigate("/home");
+            }
+        } catch (error) {
+            console.log(error);
+            console.log(error.message);
+        }
     };
 
     return (
