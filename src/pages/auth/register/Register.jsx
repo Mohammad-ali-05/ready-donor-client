@@ -6,6 +6,7 @@ import useDivision from "../../../hooks/useDivision";
 import useAxios from "../../../hooks/useAxios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Register = () => {
     // react hook
@@ -21,7 +22,7 @@ const Register = () => {
     } = useForm();
 
     // Data from hooks
-    const { auth, createUser, updateUserProfile, setUser } = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
     const axios = useAxios();
     const axiosSecure = useAxiosSecure();
     const divisionData = useDivision();
@@ -76,7 +77,7 @@ const Register = () => {
     }, [axios, selectedDistrict, setValue]);
 
     const handleFormSubmit = async (data) => {
-        try {
+        const registerPromise = async () => {
             const {
                 bloodGroup,
                 district,
@@ -88,8 +89,11 @@ const Register = () => {
                 upazila,
             } = data;
 
+            // Destructure location
             const [divisionId, divisionName] = division.split(" ");
+            
             const [districtId, districtName] = district.split(" ");
+
             const [upazilaId, upazilaName] = upazila.split(" ");
 
             const profileImage = image[0];
@@ -97,7 +101,7 @@ const Register = () => {
             // Create Firebase user
             const result = await createUser(email, password);
 
-            // Upload image to ImgBB
+            // Upload image
             const formData = new FormData();
             formData.append("image", profileImage);
 
@@ -107,16 +111,15 @@ const Register = () => {
 
             const imageUrl = imageRes.data.data.url;
 
-            // Update Firebase profile
+            // Update profile
             await updateUserProfile({
                 displayName: name,
                 photoURL: imageUrl,
             });
 
-            // Current Firebase user
             const currentUser = result.user;
 
-            // Create user object
+            // User data
             const userData = {
                 uid: currentUser.uid,
                 email: currentUser.email,
@@ -135,16 +138,21 @@ const Register = () => {
                 updatedAt: new Date().toISOString(),
             };
 
-            // Save to MongoDB
+            // Save to database
             const dbRes = await axiosSecure.post("/user", userData);
 
             if (dbRes.data.insertedId) {
                 navigate("/home");
             }
-        } catch (error) {
-            console.log(error);
-            console.log(error.message);
-        }
+
+            return dbRes;
+        };
+
+        toast.promise(registerPromise(), {
+            pending: "Creating user...",
+            success: "User created successfully",
+            error: "Failed to create user",
+        });
     };
 
     return (
