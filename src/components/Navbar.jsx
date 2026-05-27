@@ -1,8 +1,13 @@
 import React from "react";
 import { MdOutlineBloodtype } from "react-icons/md";
-import { Link, NavLink } from "react-router";
+import { Await, Link, NavLink } from "react-router";
+import useAuth from "../hooks/useAuth";
 
 const Navbar = () => {
+    /* Custom hooks */
+    const { user, logout } = useAuth();
+
+    /* Links for navbar */
     const links = (
         <>
             <li>
@@ -32,17 +37,24 @@ const Navbar = () => {
                     Blood Donations{" "}
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to={"/funding"}
-                    className={({ isActive }) =>
-                        `text-[17px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-black"}`
-                    }>
-                    Funding
-                </NavLink>
-            </li>
+            {user && (
+                <li>
+                    <NavLink
+                        to={"/funding"}
+                        className={({ isActive }) =>
+                            `text-[17px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-black"}`
+                        }>
+                        Funding
+                    </NavLink>
+                </li>
+            )}
         </>
     );
+
+    const handleLogout = async () => {
+        logout();
+    };
+
     return (
         <nav className="navbar bg-base-100 shadow-md p-0">
             <div className="flex justify-between items-center max-w-7xl w-full mx-auto px-8">
@@ -111,11 +123,54 @@ const Navbar = () => {
                     <ul className="flex flex-row gap-18">{links}</ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to={"/auth/login"}>
-                        <button className="text-lg text-white font-semibold  rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] w-30 h-10 hover:opacity-85">
-                            Login
-                        </button>
-                    </Link>
+                    {user ? (
+                        /* If user logged in then show profile */
+                        <div className="dropdown dropdown-end z-10">
+                            <div
+                                tabIndex={0}
+                                role="button"
+                                className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full">
+                                    <img
+                                        alt="User profile image."
+                                        src={user?.photoURL}
+                                    />
+                                </div>
+                            </div>
+                            <ul
+                                tabIndex="-1"
+                                className="menu menu-sm dropdown-content flex flex-col gap-2 bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                <li>
+                                    <Link
+                                        to={"/dashboard"}
+                                        className="text-[17px] font-semibold hover:text-[#8d1f3a] text-black">
+                                        Dashboard
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
+                                        to={"/dashboard/profile"}
+                                        className="text-[17px] font-semibold hover:text-[#8d1f3a] text-black">
+                                        Profile
+                                    </Link>
+                                </li>
+                                <li>
+                                    <button
+                                        onClick={handleLogout}
+                                        className="text-lg flex justify-center items-center text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] w-full hover:opacity-85">
+                                        Logout
+                                    </button>
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        /* If user not logged in then show login button */
+                        <Link to={"/auth/login"}>
+                            <button className="text-lg text-white font-semibold  rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] w-30 h-10 hover:opacity-85">
+                                Login
+                            </button>
+                        </Link>
+                    )}
                 </div>
             </div>
         </nav>

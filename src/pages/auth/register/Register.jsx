@@ -5,12 +5,14 @@ import useAuth from "../../../hooks/useAuth";
 import useDivision from "../../../hooks/useDivision";
 import useAxios from "../../../hooks/useAxios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Register = () => {
     // react hook
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
 
     // react form hook
     const {
@@ -144,8 +146,9 @@ const Register = () => {
                 // Save to database
                 const dbRes = await axiosSecure.post("/user", userData);
 
+                /* If user login successful then navigate to desired page or home page */
                 if (dbRes.data.insertedId) {
-                    navigate("/home");
+                    navigate(location?.state || "/home");
                 }
 
                 return dbRes;
@@ -409,7 +412,7 @@ const Register = () => {
                             Register
                         </button>
                     </form>
-                    <Link to={"/auth/login"}>
+                    <Link to={"/auth/login"} state={location?.state}>
                         <div className="text-center text-sm font-medium text-gray-700 mt-4">
                             Already have an account?{" "}
                             <button

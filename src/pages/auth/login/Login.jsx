@@ -1,12 +1,14 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 
 const Login = () => {
     // react hook
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
 
     // react form hook
     const {
@@ -28,6 +30,12 @@ const Login = () => {
                 // Create Firebase user
                 const result = await signInUser(email, password);
                 setUser(result.user);
+
+                /* If user login successful then navigate to desired page or home page */
+                if (result?.user.email) {
+                    navigate(location?.state || "/home");
+                }
+
                 return result.user;
             } catch (error) {
                 if (error.code === "auth/invalid-credential") {
@@ -116,7 +124,7 @@ const Login = () => {
                             Login
                         </button>
                     </form>
-                    <Link to={"/auth/register"}>
+                    <Link to={"/auth/register"} state={location?.state}>
                         <div className="text-center text-sm font-medium text-gray-700 mt-4">
                             Already have an account?{" "}
                             <button

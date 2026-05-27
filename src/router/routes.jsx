@@ -7,6 +7,7 @@ import FindDonor from "../pages/findDonor/FindDonor";
 import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/auth/login/Login";
 import Register from "../pages/auth/register/Register";
+import PrivateRoutes from "./PrivateRoutes";
 
 const routes = createBrowserRouter([
     {
@@ -31,7 +32,11 @@ const routes = createBrowserRouter([
             },
             {
                 path: "funding",
-                element: <Funding></Funding>,
+                element: (
+                    <PrivateRoutes>
+                        <Funding></Funding>
+                    </PrivateRoutes>
+                ),
             },
         ],
     },
