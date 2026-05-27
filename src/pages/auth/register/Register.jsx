@@ -5,7 +5,7 @@ import useAuth from "../../../hooks/useAuth";
 import useDivision from "../../../hooks/useDivision";
 import useAxios from "../../../hooks/useAxios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 
 const Register = () => {
@@ -18,10 +18,11 @@ const Register = () => {
         handleSubmit,
         control,
         setValue,
+        setError,
         formState: { errors },
     } = useForm();
 
-    // Data from hooks
+    // Data from custom hooks
     const { createUser, updateUserProfile } = useAuth();
     const axios = useAxios();
     const axiosSecure = useAxiosSecure();
@@ -33,7 +34,7 @@ const Register = () => {
     const [upazilas, setUpazilas] = useState([]);
 
     // Observer
-    const password = useWatch({
+    const watchPassword = useWatch({
         control,
         name: "password",
     });
@@ -76,76 +77,87 @@ const Register = () => {
             });
     }, [axios, selectedDistrict, setValue]);
 
+    /* Handle form register */
     const handleFormSubmit = async (data) => {
         const registerPromise = async () => {
-            const {
-                bloodGroup,
-                district,
-                division,
-                email,
-                image,
-                name,
-                password,
-                upazila,
-            } = data;
+            try {
+                const {
+                    bloodGroup,
+                    district,
+                    division,
+                    email,
+                    image,
+                    name,
+                    password,
+                    upazila,
+                } = data;
 
-            // Destructure location
-            const [divisionId, divisionName] = division.split(" ");
-            
-            const [districtId, districtName] = district.split(" ");
+                // Destructure location
+                const [divisionId, divisionName] = division.split(" ");
 
-            const [upazilaId, upazilaName] = upazila.split(" ");
+                const [districtId, districtName] = district.split(" ");
 
-            const profileImage = image[0];
+                const [upazilaId, upazilaName] = upazila.split(" ");
 
-            // Create Firebase user
-            const result = await createUser(email, password);
+                const profileImage = image[0];
 
-            // Upload image
-            const formData = new FormData();
-            formData.append("image", profileImage);
+                // Create Firebase user
+                const result = await createUser(email, password);
 
-            const imageApiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
+                // Upload image
+                const formData = new FormData();
+                formData.append("image", profileImage);
 
-            const imageRes = await axios.post(imageApiUrl, formData);
+                const imageApiUrl = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_image_host_key}`;
 
-            const imageUrl = imageRes.data.data.url;
+                const imageRes = await axios.post(imageApiUrl, formData);
 
-            // Update profile
-            await updateUserProfile({
-                displayName: name,
-                photoURL: imageUrl,
-            });
+                const imageUrl = imageRes.data.data.url;
 
-            const currentUser = result.user;
+                // Update profile
+                await updateUserProfile({
+                    displayName: name,
+                    photoURL: imageUrl,
+                });
 
-            // User data
-            const userData = {
-                uid: currentUser.uid,
-                email: currentUser.email,
-                name,
-                image: imageUrl,
-                bloodGroup,
-                divisionName,
-                divisionId,
-                districtName,
-                districtId,
-                upazilaName,
-                upazilaId,
-                status: "active",
-                role: "donor",
-                createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString(),
-            };
+                const currentUser = result.user;
 
-            // Save to database
-            const dbRes = await axiosSecure.post("/user", userData);
+                // User data
+                const userData = {
+                    uid: currentUser.uid,
+                    email: currentUser.email,
+                    name,
+                    image: imageUrl,
+                    bloodGroup,
+                    divisionName,
+                    divisionId,
+                    districtName,
+                    districtId,
+                    upazilaName,
+                    upazilaId,
+                    status: "active",
+                    role: "donor",
+                    createdAt: new Date().toISOString(),
+                    updatedAt: new Date().toISOString(),
+                };
 
-            if (dbRes.data.insertedId) {
-                navigate("/home");
+                // Save to database
+                const dbRes = await axiosSecure.post("/user", userData);
+
+                if (dbRes.data.insertedId) {
+                    navigate("/home");
+                }
+
+                return dbRes;
+            } catch (error) {
+                if (error.code === "auth/email-already-in-use") {
+                    setError("email", {
+                        type: "manual",
+                        message: "This email is already registered",
+                    });
+                }
+                throw error;
             }
-
-            return dbRes;
         };
 
         toast.promise(registerPromise(), {
@@ -156,8 +168,8 @@ const Register = () => {
     };
 
     return (
-        <section className="relative bg-linear-to-br from-red-50 to-red-100 py-20">
-            <div className="max-w-7xl flex justify-center items-center mx-auto px-4 sm:px-6 lg:px-8">
+        <section className="relative bg-linear-to-br  from-red-50 to-red-100 py-20">
+            <div className="flex justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="card bg-base-100 w-full max-w-lg shrink-0 p-6">
                     <div className="text-center mb-6">
                         <h2 className="text-2xl mb-2">Join Save Lives</h2>
@@ -380,7 +392,7 @@ const Register = () => {
                                 {...register("confirmPassword", {
                                     required: "Please confirm password",
                                     validate: (value) =>
-                                        value === password ||
+                                        value === watchPassword ||
                                         "Passwords do not match",
                                 })}
                                 type="password"
@@ -393,10 +405,20 @@ const Register = () => {
                                 </p>
                             )}
                         </fieldset>
-                        <button className="btn btn-neutral w-full mt-4">
+                        <button className="text-lg text-white font-semibold  rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
                             Register
                         </button>
                     </form>
+                    <Link to={"/auth/login"}>
+                        <div className="text-center text-sm font-medium text-gray-700 mt-4">
+                            Already have an account?{" "}
+                            <button
+                                type="button"
+                                className="text-[#8d1f3a] hover:underline">
+                                Login in here.
+                            </button>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </section>
