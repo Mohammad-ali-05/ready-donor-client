@@ -8,11 +8,16 @@ import AuthLayout from "../layouts/AuthLayout";
 import Login from "../pages/auth/login/Login";
 import Register from "../pages/auth/register/Register";
 import PrivateRoutes from "./PrivateRoutes";
+import UserProvider from "../contexts/UserProvider";
 
 const routes = createBrowserRouter([
     {
         path: "/",
-        element: <MainLayout></MainLayout>,
+        element: (
+            <UserProvider>
+                <MainLayout></MainLayout>
+            </UserProvider>
+        ),
         children: [
             {
                 index: true,
@@ -42,7 +47,11 @@ const routes = createBrowserRouter([
     },
     {
         path: "/auth",
-        element: <AuthLayout></AuthLayout>,
+        element: (
+            <UserProvider>
+                <AuthLayout></AuthLayout>
+            </UserProvider>
+        ),
         children: [
             {
                 path: "login",

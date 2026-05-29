@@ -5,7 +5,6 @@ import { Navigate, useLocation } from "react-router";
 const PrivateRoutes = ({ children }) => {
     /* React hooks */
     const location = useLocation();
-    console.log(location);
 
     /* Custom hooks */
     const { user } = useAuth();

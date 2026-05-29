@@ -12,7 +12,6 @@ const Register = () => {
     // react hook
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location);
 
     // react form hook
     const {
