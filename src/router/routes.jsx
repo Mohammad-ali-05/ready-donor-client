@@ -9,6 +9,10 @@ import Login from "../pages/auth/login/Login";
 import Register from "../pages/auth/register/Register";
 import PrivateRoutes from "./PrivateRoutes";
 import UserProvider from "../contexts/UserProvider";
+import DashboardLayout from "../layouts/DashboardLayout";
+import MyDashboard from "../pages/dashboard/myDashboard/MyDashboard";
+import MyDonationRequest from "../pages/dashboard/myDonationRequest/MyDonationRequest";
+import CreateDonationRequest from "../pages/dashboard/createDonationRequest/CreateDonationRequest";
 
 const routes = createBrowserRouter([
     {
@@ -42,6 +46,30 @@ const routes = createBrowserRouter([
                         <Funding></Funding>
                     </PrivateRoutes>
                 ),
+            },
+            {
+                path: "dashboard",
+                element: (
+                    <PrivateRoutes>
+                        <DashboardLayout></DashboardLayout>
+                    </PrivateRoutes>
+                ),
+                children: [
+                    {
+                        path: "my-dashboard",
+                        element: <MyDashboard></MyDashboard>,
+                    },
+                    {
+                        path: "my-donation-requests",
+                        element: <MyDonationRequest></MyDonationRequest>,
+                    },
+                    {
+                        path: "create-donation-request",
+                        element: (
+                            <CreateDonationRequest></CreateDonationRequest>
+                        ),
+                    },
+                ],
             },
         ],
     },
