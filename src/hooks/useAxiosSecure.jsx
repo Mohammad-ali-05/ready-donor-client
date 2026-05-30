@@ -35,7 +35,7 @@ const useAxiosSecure = () => {
                 const status = error.response?.status;
                 if (status === 401 || status === 403) {
                     logout().then(() => {
-                        navigate("/auth/register");
+                        navigate("/auth/login");
                         toast.error(error.response.data.message);
                     });
                 }

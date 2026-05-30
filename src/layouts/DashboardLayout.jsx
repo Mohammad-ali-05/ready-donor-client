@@ -4,12 +4,12 @@ import useDbUser from "../hooks/useDbUser";
 
 const DashboardLayout = () => {
     const donorAndAdminRole = ["donor", "admin"];
-    const { userInfo } = useDbUser();
+    const { dbUser } = useDbUser();
 
     const dashboardLinks = (
         <>
             {/* If user role is donor or admin show these links */}
-            {donorAndAdminRole.includes(userInfo?.role) || (
+            {donorAndAdminRole.includes(dbUser?.role) && (
                 <>
                     {/* My dashboard */}
                     <li>

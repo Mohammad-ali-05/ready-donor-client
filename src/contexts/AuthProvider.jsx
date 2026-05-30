@@ -24,8 +24,8 @@ const AuthProvider = ({ children }) => {
     };
 
     // Update user profile (displayName, photoURL)
-    const updateUserProfile = (userInfo) => {
-        return updateProfile(auth.currentUser, userInfo);
+    const updateUserProfile = (updatedData) => {
+        return updateProfile(auth.currentUser, updatedData);
     };
 
     // Log out user
