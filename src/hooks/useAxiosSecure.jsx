@@ -15,7 +15,7 @@ const useAxiosSecure = () => {
     useEffect(() => {
         const requestInterceptorId = axiosInstance.interceptors.request.use(
             (config) => {
-                const token = auth.currentUser.accessToken;
+                const token = auth?.currentUser?.accessToken;
                 if (token) {
                     config.headers.Authorization = `Bearer ${token}`;
                 }
@@ -32,13 +32,15 @@ const useAxiosSecure = () => {
             },
             (error) => {
                 console.log(error);
-                const status = error.status;
+                const status = error.response?.status;
                 if (status === 401 || status === 403) {
                     logout().then(() => {
                         navigate("/auth/register");
                         toast.error(error.response.data.message);
                     });
                 }
+
+                return Promise.reject(error);
             },
         );
 

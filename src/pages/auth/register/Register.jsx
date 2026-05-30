@@ -165,7 +165,7 @@ const Register = () => {
         toast.promise(registerPromise(), {
             pending: "Creating user...",
             success: "User created successfully",
-            error: "Failed to create user",
+            error: "Failed to create user!",
         });
     };
 

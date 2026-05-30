@@ -13,6 +13,7 @@ import DashboardLayout from "../layouts/DashboardLayout";
 import MyDashboard from "../pages/dashboard/myDashboard/MyDashboard";
 import MyDonationRequest from "../pages/dashboard/myDonationRequest/MyDonationRequest";
 import CreateDonationRequest from "../pages/dashboard/createDonationRequest/CreateDonationRequest";
+import PublicRoutes from "./PublicRoutes";
 
 const routes = createBrowserRouter([
     {
@@ -56,6 +57,10 @@ const routes = createBrowserRouter([
                 ),
                 children: [
                     {
+                        index: true,
+                        element: <Navigate to={"my-dashboard"}></Navigate>,
+                    },
+                    {
                         path: "my-dashboard",
                         element: <MyDashboard></MyDashboard>,
                     },
@@ -77,10 +82,17 @@ const routes = createBrowserRouter([
         path: "/auth",
         element: (
             <UserProvider>
-                <AuthLayout></AuthLayout>
+                <PublicRoutes>
+                    <AuthLayout></AuthLayout>
+                </PublicRoutes>
             </UserProvider>
         ),
         children: [
+            {
+                index: true,
+                element: <Navigate to={"/auth/login"}></Navigate>,
+            },
+
             {
                 path: "login",
                 element: <Login></Login>,
