@@ -2,26 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading";
+import Swal from "sweetalert2";
 
 const DonorLatestRequest = () => {
     // React hooks
     const [donationRequests, setDonationRequests] = useState([]);
     const [loadingData, setLoadingData] = useState(true);
+    const [refetch, setRefetch] = useState(false);
 
     /* Custom hooks */
     const axiosSecure = useAxiosSecure();
 
     // fetch donation requests
     useEffect(() => {
-        axiosSecure
-            .get("/blood-donation/latest")
-            .then((result) => {
-                console.log(result.data);
+        const fetchDonationRequests = async () => {
+            try {
+                setLoadingData(true);
+
+                const result = await axiosSecure.get("/blood-donation/latest");
                 setDonationRequests(result.data);
+            } catch (error) {
+                console.log(error);
+            } finally {
                 setLoadingData(false);
-            })
-            .catch((error) => console.log(error));
-    }, [axiosSecure]);
+            }
+        };
+        fetchDonationRequests();
+    }, [axiosSecure, refetch]);
 
     // Convert date to 12 hour formate
     const formatTime = (time24) => {
@@ -33,6 +40,36 @@ const DonorLatestRequest = () => {
         if (hour === 0) hour = 12;
 
         return `${hour}:${minute} ${ampm}`;
+    };
+
+    const handleRequestDelete = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed)
+                axiosSecure
+                    .delete(`/blood-donation/${id}`)
+                    .then((result) => {
+                        console.log(result);
+                        if (result.data.deletedCount) {
+                            setRefetch(!refetch);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success",
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+        });
     };
 
     return (
@@ -137,7 +174,9 @@ const DonorLatestRequest = () => {
                                                 {/* Delete */}
                                                 <button
                                                     onClick={() =>
-                                                        handleDelete(req._id)
+                                                        handleRequestDelete(
+                                                            req._id,
+                                                        )
                                                     }
                                                     className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
                                                     Delete
