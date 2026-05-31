@@ -203,13 +203,12 @@ const MyDonationRequest = () => {
                                         {/* Actions */}
                                         <td className="p-3 grid grid-cols-1 lg:grid-cols-3 gap-2">
                                             {/* View */}
-                                            <button
-                                                onClick={() =>
-                                                    `/dashboard/donation/${req._id}`
-                                                }
-                                                className="px-2 py-1 w-full text-xs bg-gray-100 rounded">
-                                                View
-                                            </button>
+                                            <Link
+                                                to={`/dashboard/blood-donation/details/${req._id}`}>
+                                                <button className="px-2 py-1 w-full text-xs bg-gray-100 rounded">
+                                                    View
+                                                </button>
+                                            </Link>
 
                                             {/* Edit and delete button when request pending */}
                                             {req.status === "pending" && (

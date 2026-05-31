@@ -15,6 +15,7 @@ import MyDonationRequest from "../pages/dashboard/myDonationRequest/MyDonationRe
 import CreateDonationRequest from "../pages/dashboard/createDonationRequest/CreateDonationRequest";
 import PublicRoutes from "./PublicRoutes";
 import EditDonationRequest from "../pages/dashboard/editDonationRequest/EditDonationRequest";
+import BloodDonationDetails from "../pages/dashboard/bloodDonationDetails/BloodDonationDetails";
 
 const routes = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ const routes = createBrowserRouter([
                     {
                         path: "my-donation-requests/edit/:id",
                         element: <EditDonationRequest></EditDonationRequest>,
+                    },
+                    {
+                        path: "blood-donation/details/:id",
+                        element: <BloodDonationDetails></BloodDonationDetails>,
                     },
                     {
                         path: "create-donation-request",
