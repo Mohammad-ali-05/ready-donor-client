@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Loading";
+import Swal from "sweetalert2";
 
 // Filter options
 const statuses = ["all", "pending", "inprogress", "done", "canceled"];
@@ -10,6 +11,7 @@ const MyDonationRequest = () => {
     // React hooks
     const [donationRequests, setDonationRequests] = useState([]);
     const [loadingData, setLoadingData] = useState(true);
+    const [refetch, setRefetch] = useState(false);
 
     // States for pagination
     const [donationRequestCount, setRequestDonationCount] = useState(0);
@@ -49,7 +51,37 @@ const MyDonationRequest = () => {
             }
         };
         fetchDonationRequests();
-    }, [axiosSecure, currentPage, statusFilter]);
+    }, [axiosSecure, currentPage, statusFilter, refetch]);
+
+    const handleRequestDelete = async (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed)
+                axiosSecure
+                    .delete(`/blood-donation/${id}`)
+                    .then((result) => {
+                        console.log(result);
+                        if (result.data.deletedCount) {
+                            setRefetch(!refetch);
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success",
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+        });
+    };
 
     //  Convert date to 12 hour formate
     const formatTime = (time24) => {
@@ -192,7 +224,7 @@ const MyDonationRequest = () => {
                                                     {/* Delete */}
                                                     <button
                                                         onClick={() =>
-                                                            handleDelete(
+                                                            handleRequestDelete(
                                                                 req._id,
                                                             )
                                                         }
