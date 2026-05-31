@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
-import useDivision from "../../../hooks/useDivision";
-import useBloodCategory from "../../../hooks/useBloodCategory";
-import useAxios from "../../../hooks/useAxios";
-import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
+import useAxios from "../../../hooks/useAxios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useNavigate } from "react-router";
+import useBloodCategory from "../../../hooks/useBloodCategory";
+import useDivision from "../../../hooks/useDivision";
+import { useNavigate, useParams } from "react-router";
+import Loading from "../../../components/Loading";
 
-const CreateDonationRequest = () => {
-    // react hooks
+const EditDonationRequest = () => {
+    // React hooks
+    const prevDivision = useRef();
+    const prevDistrict = useRef();
     const navigate = useNavigate();
+    const { id } = useParams();
+
+    // loadingData state
+    const [loadingData, setLoadingData] = useState(true);
 
     // react form hook
     const {
@@ -18,11 +24,11 @@ const CreateDonationRequest = () => {
         handleSubmit,
         control,
         setValue,
+        reset,
         formState: { errors },
     } = useForm();
 
     // Custom hooks
-    const { user } = useAuth();
     const axios = useAxios();
     const axiosSecure = useAxiosSecure();
     const divisionData = useDivision();
@@ -42,36 +48,100 @@ const CreateDonationRequest = () => {
         name: "recipientDistrict",
     });
 
+    useEffect(() => {
+        const fetchDonationREquest = async () => {
+            try {
+                setLoadingData(true);
+                const result = await axiosSecure.get(`/blood-donation/${id}`);
+                const finalResult = result.data;
+
+                if (!finalResult) {
+                    throw new Error("Donation request not found.");
+                }
+
+                const divisionId = finalResult.divisionId;
+                const districtId = finalResult.districtId;
+
+                const districtRes = await axios.get(
+                    `/district?divisionId=${divisionId}`,
+                );
+                setDistricts(districtRes.data);
+
+                const upazilaRes = await axios.get(
+                    `/upazila?districtId=${districtId}`,
+                );
+                setUpazilas(upazilaRes.data);
+
+                reset({
+                    requesterName: finalResult.requesterName,
+                    requesterEmail: finalResult.requesterEmail,
+                    recipientName: finalResult.recipientName,
+                    bloodGroup: finalResult.bloodGroup,
+
+                    // Set the full string including ID and Name for selection
+                    recipientDivision: `${finalResult.divisionId} ${finalResult.divisionName}`,
+                    recipientDistrict: `${finalResult.districtId} ${finalResult.districtName}`,
+                    recipientUpazila: `${finalResult.upazilaId} ${finalResult.upazilaName}`,
+
+                    hospitalName: finalResult.hospitalName,
+                    fullAddress: finalResult.fullAddress,
+                    donationDate: finalResult.donationDate,
+                    donationTime: finalResult.donationTime,
+                    requestMessage: finalResult.requestMessage,
+                });
+            } catch (error) {
+                console.log(error);
+            } finally {
+                setLoadingData(false);
+            }
+        };
+        fetchDonationREquest();
+    }, [axios, axiosSecure, id, reset]);
+
     // Load districts when division changes
     useEffect(() => {
         if (!selectedDivision) return;
+
+        const divisionChanged =
+            prevDivision.current && prevDivision.current !== selectedDivision;
+
         axios
             .get(`/district?divisionId=${selectedDivision.split(" ")[0]}`)
-            .then((data) => {
-                setDistricts(data.data);
+            .then((res) => {
+                setDistricts(res.data);
 
-                // reset lower fields
-                setUpazilas([]);
-                setValue("recipientDistrict", "");
-                setValue("recipientUpazila", "");
+                if (divisionChanged) {
+                    setUpazilas([]);
+                    setValue("recipientDistrict", "");
+                    setValue("recipientUpazila", "");
+                }
             });
+
+        prevDivision.current = selectedDivision;
     }, [axios, selectedDivision, setValue]);
 
     // Load upazilas when district changes
     useEffect(() => {
         if (!selectedDistrict) return;
+
+        const districtChanged =
+            prevDistrict.current && prevDistrict.current !== selectedDistrict;
+
         axios
             .get(`/upazila?districtId=${selectedDistrict.split(" ")[0]}`)
-            .then((data) => {
-                setUpazilas(data.data);
+            .then((res) => {
+                setUpazilas(res.data);
 
-                // reset upazila
-                setValue("recipientUpazila", "");
+                if (districtChanged) {
+                    setValue("recipientUpazila", "");
+                }
             });
+
+        prevDistrict.current = selectedDistrict;
     }, [axios, selectedDistrict, setValue]);
 
-    /* handle create donation form submit */
-    const handleCreateDonation = (data) => {
+    /* handle update donation form submit */
+    const handleUpdateDonation = (data) => {
         const donationPromise = async () => {
             /* Donation request from data */
             const {
@@ -85,8 +155,6 @@ const CreateDonationRequest = () => {
                 recipientName,
                 recipientUpazila,
                 requestMessage,
-                requesterEmail,
-                requesterName,
             } = data;
 
             /* Donation recipient location id and name */
@@ -94,58 +162,54 @@ const CreateDonationRequest = () => {
             const [districtId, districtName] = recipientDistrict.split(" ");
             const [upazilaId, upazilaName] = recipientUpazila.split(" ");
 
-            /* Donation request object */
-            const donationRequest = {
-                requesterName,
-                requesterEmail,
-
+            /* Donation update object */
+            const donationUpdate = {
                 recipientName,
                 bloodGroup,
-
                 divisionId,
                 divisionName,
-
                 districtId,
                 districtName,
-
                 upazilaId,
                 upazilaName,
-
                 hospitalName,
                 fullAddress,
-
                 donationDate,
                 donationTime,
-
                 requestMessage,
             };
-            console.log(donationRequest);
+            console.log(donationUpdate);
 
-            const result = await axiosSecure.post(
-                "/blood-donation",
-                donationRequest,
+            const result = await axiosSecure.patch(
+                `/blood-donation/${id}`,
+                donationUpdate,
             );
 
             console.log(result);
-            if (!result.data.insertedId) {
-                throw new Error("Donation request was not created");
+            if (!result.data.modifiedCount) {
+                throw new Error("Donation request was not updated");
             }
 
             return result;
         };
 
         toast.promise(donationPromise(), {
-            pending: "Creating donation request...",
-            success: "Donation request created successfully",
-            error: "Failed to create donation request!",
+            pending: "Updating donation request...",
+            success: "Donation request updated successfully",
+            error: "Failed to update donation request!",
         });
     };
 
     return (
         <div>
+            {loadingData && (
+                <div className="flex justify-center items-center my-40">
+                    <Loading></Loading>
+                </div>
+            )}
             <form
-                onSubmit={handleSubmit(handleCreateDonation)}
-                className="card-body p-6 rounded-lg shadow-xl">
+                onSubmit={handleSubmit(handleUpdateDonation)}
+                className={`card-body p-6 rounded-lg shadow-xl ${loadingData && "hidden"}`}>
                 <div className="flex justify-between items-center">
                     <legend className="text-xl font-semibold mb-4">
                         Edit Donation Requests
@@ -170,7 +234,6 @@ const CreateDonationRequest = () => {
                         })}
                         type="text"
                         readOnly
-                        value={user?.displayName}
                         className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
                     />
                     {errors.requesterName && (
@@ -195,7 +258,6 @@ const CreateDonationRequest = () => {
                         })}
                         type="email"
                         readOnly
-                        value={user?.email}
                         className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
                     />
                     {errors.requesterEmail && (
@@ -237,7 +299,6 @@ const CreateDonationRequest = () => {
                         {...register("bloodGroup", {
                             required: "Blood group is required",
                         })}
-                        defaultValue=""
                         className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                         <option value="">All Blood Types</option>
                         {bloodCategory.map((category, index) => (
@@ -263,7 +324,6 @@ const CreateDonationRequest = () => {
                         {...register("recipientDivision", {
                             required: "Division is required",
                         })}
-                        defaultValue=""
                         className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                         <option value="">Select Division</option>
                         {divisionData.map((division) => (
@@ -288,7 +348,6 @@ const CreateDonationRequest = () => {
                         {...register("recipientDistrict", {
                             required: "District is required",
                         })}
-                        defaultValue=""
                         className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                         <option value="">Select District</option>
                         {districts.map((district) => (
@@ -313,7 +372,6 @@ const CreateDonationRequest = () => {
                         {...register("recipientUpazila", {
                             required: "Upazila is required",
                         })}
-                        defaultValue=""
                         className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
                         <option value="">Select Upazila</option>
                         {upazilas.map((upazila) => (
@@ -447,11 +505,11 @@ const CreateDonationRequest = () => {
                 </fieldset>
 
                 <button className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
-                    Request
+                    Update
                 </button>
             </form>
         </div>
     );
 };
 
-export default CreateDonationRequest;
+export default EditDonationRequest;

@@ -98,7 +98,7 @@ const MyDonationRequest = () => {
     return (
         <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">
-                All Donation Requests{" "}
+                My Donation Requests{" "}
                 <span className="bg-linear-to-br from-[#B32346] to-[#46052D] bg-clip-text text-transparent">
                     {donationRequestCount}
                 </span>{" "}
@@ -277,7 +277,7 @@ const MyDonationRequest = () => {
                     </div>
 
                     {/* If donation course is lower the limit then hide pagination */}
-                    {donationRequestCount < limit || (
+                    {donationRequestCount <= limit || (
                         <div className="flex justify-center flex-wrap gap-3 py-10">
                             {currentPage > 0 && (
                                 <button

@@ -14,6 +14,7 @@ import MyDashboard from "../pages/dashboard/myDashboard/MyDashboard";
 import MyDonationRequest from "../pages/dashboard/myDonationRequest/MyDonationRequest";
 import CreateDonationRequest from "../pages/dashboard/createDonationRequest/CreateDonationRequest";
 import PublicRoutes from "./PublicRoutes";
+import EditDonationRequest from "../pages/dashboard/editDonationRequest/EditDonationRequest";
 
 const routes = createBrowserRouter([
     {
@@ -67,6 +68,10 @@ const routes = createBrowserRouter([
                     {
                         path: "my-donation-requests",
                         element: <MyDonationRequest></MyDonationRequest>,
+                    },
+                    {
+                        path: "my-donation-requests/edit/:id",
+                        element: <EditDonationRequest></EditDonationRequest>,
                     },
                     {
                         path: "create-donation-request",

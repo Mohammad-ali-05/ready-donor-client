@@ -42,7 +42,7 @@ const DonorLatestRequest = () => {
         return `${hour}:${minute} ${ampm}`;
     };
 
-    const handleRequestDelete = async (id) => {
+    const handleRequestDelete = (id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -52,7 +52,7 @@ const DonorLatestRequest = () => {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
         }).then((result) => {
-            if (result.isConfirmed)
+            if (result.isConfirmed) {
                 axiosSecure
                     .delete(`/blood-donation/${id}`)
                     .then((result) => {
@@ -69,6 +69,7 @@ const DonorLatestRequest = () => {
                     .catch((error) => {
                         console.log(error);
                     });
+            }
         });
     };
 
@@ -153,9 +154,7 @@ const DonorLatestRequest = () => {
                                         {/* View */}
                                         <button
                                             onClick={() =>
-                                                navigate(
-                                                    `/dashboard/donation/${req._id}`,
-                                                )
+                                                `/dashboard/donation/${req._id}`
                                             }
                                             className="px-2 py-1 w-full text-xs bg-gray-100 rounded">
                                             View
