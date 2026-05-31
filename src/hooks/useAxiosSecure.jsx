@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 
 const axiosInstance = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://ready-donor-server.onrender.com/api",
 });
 
 const useAxiosSecure = () => {
