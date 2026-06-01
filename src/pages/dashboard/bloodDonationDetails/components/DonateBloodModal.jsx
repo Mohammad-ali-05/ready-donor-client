@@ -65,7 +65,7 @@ const DonateBloodModal = ({
                 };
 
                 const result = await axiosSecure.patch(
-                    `/update-donor/${donationDetails._id}`,
+                    `/blood-donation/update-donor/${donationDetails._id}`,
                     donorData,
                 );
 

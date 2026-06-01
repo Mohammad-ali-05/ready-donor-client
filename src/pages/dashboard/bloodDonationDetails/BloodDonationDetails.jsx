@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { GoDotFill } from "react-icons/go";
 import DonateBloodModal from "./components/DonateBloodModal";
@@ -7,11 +7,12 @@ import DonateBloodModal from "./components/DonateBloodModal";
 const BloodDonationDetails = () => {
     // React hooks
     const { id } = useParams();
+    const navigate = useNavigate();
     const [donationDetails, setDonationDetails] = useState(null);
     const [status, setStatus] = useState(null);
     const [updatedDonor, setUpdatedDonor] = useState(false);
     const modalRef = useRef(null);
-    console.log(donationDetails);
+
     // Custom hooks
     const axiosSecure = useAxiosSecure();
 
@@ -56,8 +57,8 @@ const BloodDonationDetails = () => {
         <div>
             <div className="max-w-3xl mx-auto px-4 py-8 pb-16">
                 {/* Back link */}
-                <a
-                    href="#"
+                <button
+                    onClick={() => navigate(-1)}
                     className="inline-flex items-center gap-1.5  text-sm font-medium text-gray-700  hover:text-[#46052D] mb-6 transition-colors no-underline">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +74,7 @@ const BloodDonationDetails = () => {
                         />
                     </svg>
                     Back to requests
-                </a>
+                </button>
 
                 {/* Page header */}
                 <div className="flex items-start justify-between gap-4 mb-6 bg-white border shadow-sm border-gray-100 rounded-xl p-5 flex-wrap">
@@ -328,7 +329,61 @@ const BloodDonationDetails = () => {
 
                 {/* Donor info */}
                 {(status === "inprogress" || status === "done") && (
-                    <div className="bg-white border shadow-sm border-gray-100 rounded-xl p-5 mb-4"></div>
+                    <div className="bg-white border shadow-sm border-gray-100 rounded-xl p-5 mb-4">
+                        <p className="text-sm font-medium text-gray-700 uppercase tracking-widest mb-4">
+                            Donor details
+                        </p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+                            {/* Donor name */}
+                            <div className="flex items-center gap-3 py-3">
+                                <svg
+                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    stroke="currentColor"
+                                    fill="currentColor"
+                                    stroke-width="0"
+                                    viewBox="0 0 24 24"
+                                    height="1em"
+                                    width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001.01 0 .002-.001.002-.001h.001l.002-.001.003-.001.002-.001.002-.001.003-.001.002-.001c.003 0 .001-.001.002-.001l.003-.002.002-.001.002-.001.003-.001.002-.001h.001l.002-.001h.001l.002-.001.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485.081.065.163.139.247.222l.707.707.707-.707c.084-.083.166-.157.247-.222.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z"></path>
+                                </svg>
+                                <div>
+                                    <p className="text-[12px] text-gray-700">
+                                        Donor name
+                                    </p>
+                                    <p className="text-sm font-medium text-gray-800">
+                                        {donationDetails?.donorName}
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Donor email */}
+                            <div className="flex items-center gap-3 py-3">
+                                <svg
+                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    stroke="currentColor"
+                                    fill="currentColor"
+                                    stroke-width="0"
+                                    viewBox="0 0 24 24"
+                                    height="1em"
+                                    width="1em"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        fill="none"
+                                        d="M0 0h24v24H0V0z"></path>
+                                    <path d="M12 1.95c-5.52 0-10 4.48-10 10s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57v-1.43c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57v-1.43c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"></path>
+                                </svg>
+                                <div>
+                                    <p className="text-[12px] text-gray-700">
+                                        Donor name
+                                    </p>
+                                    <p className="text-sm font-medium text-gray-800">
+                                        {donationDetails?.donorEmail}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 )}
 
                 {/* Request message card */}

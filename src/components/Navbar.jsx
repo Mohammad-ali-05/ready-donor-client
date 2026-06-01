@@ -81,7 +81,7 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabindex="-1"
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
                             {links}
                         </ul>
                     </div>
@@ -139,7 +139,7 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex="-1"
-                                className="menu menu-sm dropdown-content flex flex-col gap-2 bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
                                 <li>
                                     <Link
                                         to={"/dashboard"}
@@ -147,7 +147,7 @@ const Navbar = () => {
                                         Dashboard
                                     </Link>
                                 </li>
-                                <li>
+                                <li className="my-2">
                                     <Link
                                         to={"/dashboard/profile"}
                                         className="text-[17px] font-semibold hover:text-[#8d1f3a] text-black">

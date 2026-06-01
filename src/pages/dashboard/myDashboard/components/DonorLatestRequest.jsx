@@ -56,12 +56,50 @@ const DonorLatestRequest = () => {
                 axiosSecure
                     .delete(`/blood-donation/${id}`)
                     .then((result) => {
-                        console.log(result);
                         if (result.data.deletedCount) {
                             setRefetch(!refetch);
                             Swal.fire({
                                 title: "Deleted!",
                                 text: "Your file has been deleted.",
+                                icon: "success",
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        });
+    };
+
+    // handle Status Update
+    const handleUpdateStatus = (id, status) => {
+        Swal.fire({
+            title: `Are you sure you want to ${
+                status === "canceled"
+                    ? "cancel this request?"
+                    : "mark this request as completed?"
+            }`,
+            text: "You won't be able to revert this!",
+            icon: status === "canceled" ? "warning" : "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText:
+                status === "canceled" ? "Yes, cancel it!" : "Yes, complete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure
+                    .patch(`/blood-donation/update-status/${id}`, { status })
+                    .then((result) => {
+                        if (result.data.modifiedCount) {
+                            setRefetch(!refetch);
+                            Swal.fire({
+                                title: "Update Status!",
+                                text:
+                                    status === "canceled"
+                                        ? "Your donation request has been canceled"
+                                        : "Your donation request has been completed successfully",
                                 icon: "success",
                             });
                         }
@@ -135,12 +173,27 @@ const DonorLatestRequest = () => {
                                         </span>
                                     </td>
 
-                                    {/* donor info only if inprogress */}
+                                    {/* donor info only if inprogress and done */}
                                     <td className="p-3">
-                                        {req.status === "inprogress" ? (
-                                            <div className="text-xs text-gray-500 mt-1">
-                                                {req.donorName} (
-                                                {req.donorEmail})
+                                        {req.status === "inprogress" ||
+                                        req.status === "done" ? (
+                                            <div className="text-sm text-gray-500 mt-1">
+                                                <p>
+                                                    <span className="font-semibold">
+                                                        Donor Name:
+                                                    </span>{" "}
+                                                    {req.donorName}
+                                                </p>
+                                                <p>
+                                                    <span className="font-semibold">
+                                                        Donor Email:
+                                                    </span>{" "}
+                                                    {req.donorEmail}
+                                                </p>
+                                            </div>
+                                        ) : req.status === "canceled" ? (
+                                            <div className="text-xs text-red-400 mt-1">
+                                                {"Request has been canceled"}
                                             </div>
                                         ) : (
                                             <div className="text-xs text-gray-500 mt-1">
@@ -150,44 +203,39 @@ const DonorLatestRequest = () => {
                                     </td>
 
                                     {/* Actions */}
-                                    <td className="p-3 grid grid-cols-1 lg:grid-cols-3 gap-2">
+                                    <td className="p-3 grid grid-cols-1 lg:grid-cols-2 gap-2">
                                         {/* View */}
                                         <Link
-                                            to={`/dashboard/blood-donation/details/${req._id}`}>
+                                            to={`/dashboard/blood-donation/details/${req._id}`}
+                                            className="col-span-2">
                                             <button className="px-2 py-1 w-full text-xs bg-gray-100 rounded">
                                                 View
                                             </button>
                                         </Link>
 
-                                        {/* Edit and delete button when request pending */}
-                                        {req.status === "pending" && (
-                                            <>
-                                                {/* Edit */}
-                                                <Link
-                                                    to={`/dashboard/my-donation-requests/edit/${req._id}`}>
-                                                    <button className="px-2 w-full py-1 text-xs bg-blue-100 text-blue-700 rounded">
-                                                        Edit
-                                                    </button>
-                                                </Link>
-                                                {/* Delete */}
-                                                <button
-                                                    onClick={() =>
-                                                        handleRequestDelete(
-                                                            req._id,
-                                                        )
-                                                    }
-                                                    className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
-                                                    Delete
-                                                </button>
-                                            </>
-                                        )}
+                                        {/* Edit */}
+                                        <Link
+                                            to={`/dashboard/my-donation-requests/edit/${req._id}`}>
+                                            <button className="px-2 w-full py-1 text-xs bg-blue-100 text-blue-700 rounded">
+                                                Edit
+                                            </button>
+                                        </Link>
+
+                                        {/* Delete */}
+                                        <button
+                                            onClick={() =>
+                                                handleRequestDelete(req._id)
+                                            }
+                                            className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
+                                            Delete
+                                        </button>
 
                                         {/* Done or cancel button when request inprogress */}
                                         {req.status === "inprogress" && (
                                             <>
                                                 <button
                                                     onClick={() =>
-                                                        updateStatus(
+                                                        handleUpdateStatus(
                                                             req._id,
                                                             "done",
                                                         )
@@ -198,7 +246,7 @@ const DonorLatestRequest = () => {
 
                                                 <button
                                                     onClick={() =>
-                                                        updateStatus(
+                                                        handleUpdateStatus(
                                                             req._id,
                                                             "canceled",
                                                         )

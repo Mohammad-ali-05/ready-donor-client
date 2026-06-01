@@ -178,14 +178,12 @@ const EditDonationRequest = () => {
                 donationTime,
                 requestMessage,
             };
-            console.log(donationUpdate);
 
             const result = await axiosSecure.patch(
                 `/blood-donation/${id}`,
                 donationUpdate,
             );
 
-            console.log(result);
             if (!result.data.modifiedCount) {
                 throw new Error("Donation request was not updated");
             }
@@ -216,6 +214,7 @@ const EditDonationRequest = () => {
                     </legend>
                     <button
                         onClick={() => navigate(-1)}
+                        type="button"
                         className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] px-4 py-1 hover:opacity-85">
                         Go Back
                     </button>
@@ -504,8 +503,10 @@ const EditDonationRequest = () => {
                     )}
                 </fieldset>
 
-                <button className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
-                    Update
+                <button
+                    type="submit"
+                    className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
+                    Update Donation
                 </button>
             </form>
         </div>

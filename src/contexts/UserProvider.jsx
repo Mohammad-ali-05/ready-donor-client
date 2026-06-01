@@ -6,13 +6,21 @@ import useAxiosSecure from "../hooks/useAxiosSecure";
 const UserProvider = ({ children }) => {
     /* React hooks */
     const [dbUser, setDbUser] = useState(null);
+    const [userLoading, setUserLoading] = useState(true);
 
     /* Custom hooks */
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        if (user) {
+        const fetchUser = () => {
+            if (!user) {
+                setDbUser(null);
+                setUserLoading(false);
+                return;
+            }
+            setUserLoading(true);
+
             axiosSecure
                 .get("/user")
                 .then((result) => {
@@ -20,12 +28,18 @@ const UserProvider = ({ children }) => {
                 })
                 .catch((error) => {
                     console.log(error);
+                })
+                .finally(() => {
+                    setUserLoading(false);
                 });
-        }
+        };
+        fetchUser();
     }, [user, axiosSecure]);
 
     const dbUserData = {
         dbUser,
+        userLoading,
+        setUserLoading,
     };
 
     return <UserContext value={dbUserData}>{children}</UserContext>;

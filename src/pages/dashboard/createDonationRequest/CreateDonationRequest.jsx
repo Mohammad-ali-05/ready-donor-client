@@ -119,7 +119,6 @@ const CreateDonationRequest = () => {
 
                 requestMessage,
             };
-            console.log(donationRequest);
 
             const result = await axiosSecure.post(
                 "/blood-donation",
@@ -148,10 +147,11 @@ const CreateDonationRequest = () => {
                 className="card-body p-6 rounded-lg shadow-xl">
                 <div className="flex justify-between items-center">
                     <legend className="text-xl font-semibold mb-4">
-                        Edit Donation Requests
+                        Create Donation Requests
                     </legend>
                     <button
                         onClick={() => navigate(-1)}
+                        type="button"
                         className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] px-4 py-1 hover:opacity-85">
                         Go Back
                     </button>
@@ -446,7 +446,9 @@ const CreateDonationRequest = () => {
                     )}
                 </fieldset>
 
-                <button className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
+                <button
+                    type="submit"
+                    className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
                     Request
                 </button>
             </form>
