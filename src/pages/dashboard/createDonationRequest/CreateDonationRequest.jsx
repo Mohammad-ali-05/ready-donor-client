@@ -7,6 +7,7 @@ import useAuth from "../../../hooks/useAuth";
 import { toast } from "react-toastify";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useNavigate } from "react-router";
+import useDbUser from "../../../hooks/useDbUser";
 
 const CreateDonationRequest = () => {
     // react hooks
@@ -23,6 +24,7 @@ const CreateDonationRequest = () => {
 
     // Custom hooks
     const { user } = useAuth();
+    const { dbUser } = useDbUser();
     const axios = useAxios();
     const axiosSecure = useAxiosSecure();
     const divisionData = useDivision();
@@ -72,6 +74,11 @@ const CreateDonationRequest = () => {
 
     /* handle create donation form submit */
     const handleCreateDonation = (data) => {
+        if (dbUser?.status === "blocked") {
+            toast.warning("You are blocked from requesting blood donations");
+            return;
+        }
+
         const donationPromise = async () => {
             /* Donation request from data */
             const {
@@ -149,7 +156,7 @@ const CreateDonationRequest = () => {
         <div>
             <form
                 onSubmit={handleSubmit(handleCreateDonation)}
-                className="card-body p-6 rounded-lg shadow-xl">
+                className="card-body bg-white p-6 rounded-lg shadow-xl">
                 <div className="flex justify-between items-center">
                     <legend className="text-xl font-semibold mb-4">
                         Create Donation Requests
@@ -454,7 +461,9 @@ const CreateDonationRequest = () => {
                 <button
                     type="submit"
                     className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
-                    Request
+                    {dbUser?.status === "blocked"
+                        ? "You are blocked!"
+                        : "Request blood donation"}
                 </button>
             </form>
         </div>
