@@ -127,6 +127,12 @@ const AllDonationRequests = () => {
                                         : "Your donation request has been completed successfully",
                                 icon: "success",
                             });
+                        } else {
+                            Swal.fire({
+                                title: "Failed!",
+                                text: "Failed to update your status",
+                                icon: "error",
+                            });
                         }
                     })
                     .catch((error) => {

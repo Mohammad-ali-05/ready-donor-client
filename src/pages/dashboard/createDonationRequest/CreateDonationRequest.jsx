@@ -90,9 +90,14 @@ const CreateDonationRequest = () => {
             } = data;
 
             /* Donation recipient location id and name */
-            const [divisionId, divisionName] = recipientDivision.split(" ");
-            const [districtId, districtName] = recipientDistrict.split(" ");
-            const [upazilaId, upazilaName] = recipientUpazila.split(" ");
+            const [divisionId, ...divisionRest] = recipientDivision.split(" ");
+            const divisionName = divisionRest.join(" ");
+
+            const [districtId, ...districtRest] = recipientDistrict.split(" ");
+            const districtName = districtRest.join(" ");
+
+            const [upazilaId, ...upazilaRest] = recipientUpazila.split(" ");
+            const upazilaName = upazilaRest.join(" ");
 
             /* Donation request object */
             const donationRequest = {
