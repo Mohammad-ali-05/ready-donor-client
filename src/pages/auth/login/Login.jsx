@@ -38,12 +38,10 @@ const Login = () => {
                 return result.user;
             } catch (error) {
                 if (error.code === "auth/invalid-credential") {
-                    setError(
-                        setError("password", {
-                            type: "manual",
-                            message: "Invalid email or password",
-                        }),
-                    );
+                    setError("password", {
+                        type: "manual",
+                        message: "Invalid email or password",
+                    });
                 }
                 throw error;
             }

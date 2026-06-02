@@ -14,9 +14,6 @@ const DonateBloodModal = ({
     const {
         register,
         handleSubmit,
-        control,
-        setValue,
-        setError,
         reset,
         formState: { errors },
     } = useForm();
