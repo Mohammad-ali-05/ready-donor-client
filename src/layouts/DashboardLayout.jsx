@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router";
 import useDbUser from "../hooks/useDbUser";
+import { PiUsersThree } from "react-icons/pi";
 
 const DashboardLayout = () => {
     const donorAndAdminRole = ["donor", "admin"];
+    const AdminRole = ["admin"];
     const { dbUser } = useDbUser();
 
     const dashboardLinks = (
@@ -107,6 +109,30 @@ const DashboardLayout = () => {
                             </button>
                         </NavLink>
                     </li>
+                    {AdminRole.includes(dbUser?.role) && (
+                        <>
+                            <li>
+                                <NavLink
+                                    to={"/dashboard/all-users"}
+                                    className={({ isActive }) =>
+                                        `text-[16px] font-semibold hover:text-[#8d1f3a] ${
+                                            isActive
+                                                ? "text-[#8d1f3a] border-b-2"
+                                                : "text-black"
+                                        }`
+                                    }>
+                                    <button
+                                        className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                                        data-tip="All Users">
+                                        <PiUsersThree className="my-1.5 inline-block size-6" />
+                                        <span className="is-drawer-close:hidden">
+                                            All Users
+                                        </span>
+                                    </button>
+                                </NavLink>
+                            </li>
+                        </>
+                    )}
                 </>
             )}
         </>

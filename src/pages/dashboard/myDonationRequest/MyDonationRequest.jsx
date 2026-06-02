@@ -323,7 +323,7 @@ const MyDonationRequest = () => {
                         </table>
                     </div>
 
-                    {/* If donation course is lower the limit then hide pagination */}
+                    {/* If donation count is lower then the limit, hide pagination */}
                     {donationRequestCount <= limit || (
                         <div className="flex justify-center flex-wrap gap-3 py-10">
                             {currentPage > 0 && (

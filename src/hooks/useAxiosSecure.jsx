@@ -14,15 +14,19 @@ const useAxiosSecure = () => {
     // Set token using interceptor
     useEffect(() => {
         const requestInterceptorId = axiosInstance.interceptors.request.use(
-            (config) => {
-                const token = auth?.currentUser?.accessToken;
-                if (token) {
+            async (config) => {
+                const currentUser = auth.currentUser;
+
+                if (currentUser) {
+                    const token = await currentUser.getIdToken();
+
                     config.headers.Authorization = `Bearer ${token}`;
                 }
                 return config;
             },
             (error) => {
                 console.log(error);
+                return Promise.reject(error);
             },
         );
 

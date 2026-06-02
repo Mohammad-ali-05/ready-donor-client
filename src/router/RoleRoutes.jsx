@@ -1,16 +1,16 @@
 import React from "react";
 import { Navigate } from "react-router";
-import { useUserRole } from "../contexts/UserProvider";
+import useDbUser from "../hooks/useDbUser";
 
 const RoleRoute = ({ children, allowedRoles = [] }) => {
-    const { role } = useUserRole();
+    const { dbUser } = useDbUser();
 
-    if (!role) {
-        return null; 
+    if (!dbUser?.role) {
+        return null;
     }
 
-    if (!allowedRoles.includes(role)) {
-        return <Navigate to="/home" />;
+    if (!allowedRoles.includes(dbUser?.role)) {
+        return <Navigate to="/home" replace />;
     }
 
     return children;

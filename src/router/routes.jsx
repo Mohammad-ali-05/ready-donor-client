@@ -16,6 +16,8 @@ import CreateDonationRequest from "../pages/dashboard/createDonationRequest/Crea
 import PublicRoutes from "./PublicRoutes";
 import EditDonationRequest from "../pages/dashboard/editDonationRequest/EditDonationRequest";
 import BloodDonationDetails from "../pages/dashboard/bloodDonationDetails/BloodDonationDetails";
+import RoleRoute from "./RoleRoutes";
+import AllUsers from "../pages/dashboard/allUsers/AllUsers";
 
 const routes = createBrowserRouter([
     {
@@ -58,30 +60,56 @@ const routes = createBrowserRouter([
                     </PrivateRoutes>
                 ),
                 children: [
+                    /* All user routes */
                     {
                         index: true,
                         element: <Navigate to={"my-dashboard"}></Navigate>,
                     },
+
+                    /* Donor and admin routes */
                     {
                         path: "my-dashboard",
                         element: <MyDashboard></MyDashboard>,
                     },
                     {
                         path: "my-donation-requests",
-                        element: <MyDonationRequest></MyDonationRequest>,
+                        element: (
+                            <RoleRoute allowedRoles={["admin", "donor"]}>
+                                <MyDonationRequest></MyDonationRequest>
+                            </RoleRoute>
+                        ),
                     },
                     {
                         path: "my-donation-requests/edit/:id",
-                        element: <EditDonationRequest></EditDonationRequest>,
+                        element: (
+                            <RoleRoute allowedRoles={["admin", "donor"]}>
+                                <EditDonationRequest></EditDonationRequest>
+                            </RoleRoute>
+                        ),
                     },
                     {
                         path: "blood-donation/details/:id",
-                        element: <BloodDonationDetails></BloodDonationDetails>,
+                        element: (
+                            <RoleRoute
+                                allowedRoles={["admin", "donor", "volunteer"]}>
+                                <BloodDonationDetails></BloodDonationDetails>
+                            </RoleRoute>
+                        ),
                     },
                     {
                         path: "create-donation-request",
                         element: (
-                            <CreateDonationRequest></CreateDonationRequest>
+                            <RoleRoute allowedRoles={["admin", "donor"]}>
+                                <CreateDonationRequest></CreateDonationRequest>
+                            </RoleRoute>
+                        ),
+                    },
+                    {
+                        path: "all-users",
+                        element: (
+                            <RoleRoute allowedRoles={["admin"]}>
+                                <AllUsers></AllUsers>
+                            </RoleRoute>
                         ),
                     },
                 ],

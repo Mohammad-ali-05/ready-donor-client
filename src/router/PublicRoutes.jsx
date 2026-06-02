@@ -7,16 +7,16 @@ const PublicRoutes = ({ children }) => {
     const location = useLocation();
 
     /* If user is not available redirect to desired page or home page */
-    if (!user) {
-        return children;
+    if (user && user?.photoURL) {
+        return (
+            <Navigate
+                to={location.state || "/"}
+                state={location.pathname}></Navigate>
+        );
     }
 
     /* If user not available return children */
-    return (
-        <Navigate
-            to={location.state || "/"}
-            state={location.pathname}></Navigate>
-    );
+    return children;
 };
 
 export default PublicRoutes;
