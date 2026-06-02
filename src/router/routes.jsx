@@ -18,6 +18,7 @@ import EditDonationRequest from "../pages/dashboard/editDonationRequest/EditDona
 import BloodDonationDetails from "../pages/dashboard/bloodDonationDetails/BloodDonationDetails";
 import RoleRoute from "./RoleRoutes";
 import AllUsers from "../pages/dashboard/allUsers/AllUsers";
+import AllDonationRequests from "../pages/dashboard/allDoantionRequests/AllDonationRequests";
 
 const routes = createBrowserRouter([
     {
@@ -112,6 +113,15 @@ const routes = createBrowserRouter([
                             </RoleRoute>
                         ),
                     },
+                    {
+                        path: "all-blood-donation-requests",
+                        element: (
+                            <RoleRoute allowedRoles={["admin", "volunteer"]}>
+                                <AllDonationRequests></AllDonationRequests>
+                            </RoleRoute>
+                        ),
+                    },
+                    
                 ],
             },
         ],
