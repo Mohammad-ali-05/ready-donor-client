@@ -14,13 +14,9 @@ const MyDashboard = () => {
 
     return (
         <div>
-            <div className="p-8 rounded-2xl bg-white shadow-md mb-10">
-                <h1 className="text-4xl md:text-5xl font-bold mb-6">
-                    Welcome back{" "}
-                    <span className="bg-linear-to-br from-[#B32346] to-[#46052D] bg-clip-text text-transparent">
-                        {user.displayName}!
-                    </span>
-                </h1>
+            <div className="bg-gradient-to-r from-[#B32346] p-6 to-[#46052D] text-white rounded-lg mb-15 shadow-sm">
+                <h1 className="text-2xl font-bold">Welcome Back👋</h1>
+                <p className="text-2xl font-bold"> {user.displayName}</p>
             </div>
             {dbUser?.role === "donor" ? (
                 /* 🩸 Donor Recent Requests */

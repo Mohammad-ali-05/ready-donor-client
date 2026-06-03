@@ -112,7 +112,7 @@ const DonorLatestRequest = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-white p-6 rounded-lg shadow-lg text-black">
             <h2 className="text-xl font-semibold mb-4">
                 Recent Donation Requests 🩸
             </h2>
