@@ -19,6 +19,7 @@ import BloodDonationDetails from "../pages/dashboard/bloodDonationDetails/BloodD
 import RoleRoute from "./RoleRoutes";
 import AllUsers from "../pages/dashboard/allUsers/AllUsers";
 import AllDonationRequests from "../pages/dashboard/allDoantionRequests/AllDonationRequests";
+import NotFound from "../pages/error/NotFound";
 
 const routes = createBrowserRouter([
     {
@@ -28,6 +29,7 @@ const routes = createBrowserRouter([
                 <MainLayout></MainLayout>
             </UserProvider>
         ),
+        errorElement: <NotFound></NotFound>,
         children: [
             {
                 index: true,
@@ -121,7 +123,6 @@ const routes = createBrowserRouter([
                             </RoleRoute>
                         ),
                     },
-                    
                 ],
             },
         ],
@@ -135,6 +136,7 @@ const routes = createBrowserRouter([
                 </PublicRoutes>
             </UserProvider>
         ),
+        errorElement: <NotFound></NotFound>,
         children: [
             {
                 index: true,
