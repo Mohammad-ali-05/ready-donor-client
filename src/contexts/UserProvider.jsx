@@ -7,6 +7,7 @@ const UserProvider = ({ children }) => {
     /* React hooks */
     const [dbUser, setDbUser] = useState(null);
     const [userLoading, setUserLoading] = useState(true);
+    const [refetch, setRefetch] = useState(false);
 
     /* Custom hooks */
     const { user } = useAuth();
@@ -34,12 +35,13 @@ const UserProvider = ({ children }) => {
                 });
         };
         fetchUser();
-    }, [user, axiosSecure]);
+    }, [user, axiosSecure, refetch]);
 
     const dbUserData = {
         dbUser,
         userLoading,
         setUserLoading,
+        setRefetch,
     };
 
     return <UserContext value={dbUserData}>{children}</UserContext>;

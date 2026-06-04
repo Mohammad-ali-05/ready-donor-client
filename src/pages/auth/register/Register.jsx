@@ -7,6 +7,7 @@ import useAxios from "../../../hooks/useAxios";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import useDbUser from "../../../hooks/useDbUser";
 
 const Register = () => {
     // react hook
@@ -25,6 +26,7 @@ const Register = () => {
 
     // Data from custom hooks
     const { createUser, updateUserProfile } = useAuth();
+    const { setRefetch } = useDbUser();
     const axios = useAxios();
     const axiosSecure = useAxiosSecure();
     const divisionData = useDivision();
@@ -147,6 +149,7 @@ const Register = () => {
 
                 /* If user login successful then navigate to desired page or home page */
                 if (dbRes.data.insertedId) {
+                    setRefetch((prev) => !prev);
                     navigate(location?.state || "/home");
                 }
 

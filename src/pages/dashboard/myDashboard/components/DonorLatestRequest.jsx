@@ -259,6 +259,15 @@ const DonorLatestRequest = () => {
                                     </td>
                                 </tr>
                             ))}
+                            {donationRequests.length === 0 && (
+                                <tr>
+                                    <td
+                                        colSpan={"8"}
+                                        className="text-center py-20 text-gray-500">
+                                        No donation requests found
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

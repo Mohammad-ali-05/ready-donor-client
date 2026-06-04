@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../../hooks/useAxios";
 import Loading from "../../components/Loading";
-import DonationCard from "./components/DonationCard";
+import DonationCard from "../../components/DonationCard";
 
 const BloodDonations = () => {
     // React hooks

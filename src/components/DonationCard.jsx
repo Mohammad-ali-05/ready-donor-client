@@ -156,7 +156,7 @@ const DonationCard = ({ donation }) => {
 
                 <Link
                     to={`/dashboard/blood-donation/details/${donation._id}`}
-                    className="mt-4 h-11 rounded-lg bg-gradient-to-r from-[#B32346] to-[#46052D] text-white font-medium flex items-center justify-center hover:opacity-90 transition">
+                    className="mt-4 h-11 rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] text-white font-medium flex items-center justify-center hover:opacity-90 transition">
                     View Details
                 </Link>
             </div>
