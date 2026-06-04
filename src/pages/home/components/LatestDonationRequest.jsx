@@ -3,6 +3,7 @@ import useAxios from "../../../hooks/useAxios";
 import Loading from "../../../components/Loading";
 import DonationCard from "../../../components/DonationCard";
 import { Link } from "react-router";
+import { toast } from "react-toastify";
 
 const LatestDonationRequest = () => {
     // React hook
@@ -20,11 +21,17 @@ const LatestDonationRequest = () => {
                     "/blood-donations/latest-pending",
                 );
 
-                console.log(result);
+                // console.log(result);
 
                 setLatestDonations(result.data);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             } finally {
                 setIsLoading(false);
             }

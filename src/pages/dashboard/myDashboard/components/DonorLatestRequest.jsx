@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import Loading from "../../../../components/Loading";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const DonorLatestRequest = () => {
     // React hooks
@@ -22,7 +23,13 @@ const DonorLatestRequest = () => {
                 const result = await axiosSecure.get("/blood-donation/latest");
                 setDonationRequests(result.data);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             } finally {
                 setLoadingData(false);
             }
@@ -66,7 +73,13 @@ const DonorLatestRequest = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
                     });
             }
         });
@@ -105,7 +118,13 @@ const DonorLatestRequest = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
                     });
             }
         });

@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { GoDotFill } from "react-icons/go";
 import DonateBloodModal from "./components/DonateBloodModal";
+import { toast } from "react-toastify";
 
 const BloodDonationDetails = () => {
     // React hooks
@@ -23,7 +24,13 @@ const BloodDonationDetails = () => {
                 setDonationDetails(result.data);
                 setStatus(result.data.status);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             }
         };
         fetchBloodDonationDetails();

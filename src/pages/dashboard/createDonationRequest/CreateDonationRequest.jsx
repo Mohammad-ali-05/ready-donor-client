@@ -137,7 +137,7 @@ const CreateDonationRequest = () => {
                 donationRequest,
             );
 
-            console.log(result);
+            // console.log(result);
             if (!result.data.insertedId) {
                 throw new Error("Donation request was not created");
             }

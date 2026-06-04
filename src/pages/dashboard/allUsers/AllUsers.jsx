@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loading from "../../../components/Loading";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 const statuses = ["all", "active", "blocked"];
 
@@ -41,7 +42,13 @@ const AllUsers = () => {
                 setUsersCount(count);
                 setTotalPage(Math.ceil(count / limit));
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             } finally {
                 setUsersLoading(false);
             }
@@ -87,7 +94,13 @@ const AllUsers = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
 
                         Swal.fire({
                             title: "Error!",
@@ -124,7 +137,13 @@ const AllUsers = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
 
                         Swal.fire({
                             title: "Error!",

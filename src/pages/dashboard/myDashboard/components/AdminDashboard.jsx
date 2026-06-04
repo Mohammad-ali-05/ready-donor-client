@@ -3,6 +3,7 @@ import { FaHandHoldingUsd } from "react-icons/fa";
 import { GiBlood } from "react-icons/gi";
 import useAxiosSecure from "../../../../hooks/useAxiosSecure";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const AdminDashboard = () => {
     // React hooks
@@ -20,7 +21,13 @@ const AdminDashboard = () => {
                 setTotalDonors(result.data.donorCount);
                 setTotalDonations(result.data.donationCount);
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             }
         };
         fetchDashboardData();
@@ -29,7 +36,6 @@ const AdminDashboard = () => {
     return (
         <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                
                 <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between">
                     <div>
                         <p className="text-xs text-gray-500 uppercase tracking-wide">

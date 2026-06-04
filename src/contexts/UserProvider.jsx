@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
 import useAuth from "../hooks/useAuth";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import { toast } from "react-toastify";
 
 const UserProvider = ({ children }) => {
     /* React hooks */
@@ -28,7 +29,13 @@ const UserProvider = ({ children }) => {
                     setDbUser(result.data);
                 })
                 .catch((error) => {
-                    console.log(error);
+                    // console.log(error);
+
+                    toast.error(
+                        error?.response?.data?.message ||
+                            error?.message ||
+                            "Something went wrong",
+                    );
                 })
                 .finally(() => {
                     setUserLoading(false);

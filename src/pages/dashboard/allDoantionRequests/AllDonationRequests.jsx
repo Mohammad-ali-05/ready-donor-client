@@ -4,6 +4,7 @@ import Loading from "../../../components/Loading";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import useDbUser from "../../../hooks/useDbUser";
+import { toast } from "react-toastify";
 
 const statuses = ["all", "pending", "inprogress", "done", "canceled"];
 
@@ -48,7 +49,13 @@ const AllDonationRequests = () => {
                 setRequestDonationCount(count);
                 setTotalPage(Math.ceil(count / limit));
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             } finally {
                 setLoadingData(false);
             }
@@ -92,7 +99,13 @@ const AllDonationRequests = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
                     });
         });
     };
@@ -136,7 +149,13 @@ const AllDonationRequests = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
                     });
             }
         });

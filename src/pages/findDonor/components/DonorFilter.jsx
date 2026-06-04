@@ -66,7 +66,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
         /* Filter data */
         const { bloodGroup, donorDistrict, donorDivision, donorUpazila } = data;
 
-        console.log(bloodGroup, donorDistrict, donorDivision, donorUpazila);
+        // console.log(bloodGroup, donorDistrict, donorDivision, donorUpazila);
 
         /* Donation donor location id and name */
         const [divisionId] = donorDivision.split(" ");
@@ -84,7 +84,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
 
         setAllDonors(result.data.donors);
         setDonorCount(result.data.donorsCount);
-        console.log(result.data);
+        // console.log(result.data);
         setIsLoading(false)
     };
 

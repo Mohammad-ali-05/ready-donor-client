@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Loading from "../../../components/Loading";
 import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 // Filter options
 const statuses = ["all", "pending", "inprogress", "done", "canceled"];
@@ -44,7 +45,13 @@ const MyDonationRequest = () => {
                 setRequestDonationCount(count);
                 setTotalPage(Math.ceil(count / limit));
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             } finally {
                 setLoadingData(false);
             }
@@ -88,7 +95,13 @@ const MyDonationRequest = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
                     });
         });
     };
@@ -126,7 +139,13 @@ const MyDonationRequest = () => {
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        // console.log(error);
+
+                        toast.error(
+                            error?.response?.data?.message ||
+                                error?.message ||
+                                "Something went wrong",
+                        );
                     });
             }
         });

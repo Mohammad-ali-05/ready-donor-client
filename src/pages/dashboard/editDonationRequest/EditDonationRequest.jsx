@@ -55,7 +55,7 @@ const EditDonationRequest = () => {
                 const result = await axiosSecure.get(`/blood-donation/${id}`);
                 const finalResult = result.data;
 
-                console.log(finalResult);
+                // console.log(finalResult);
 
                 if (!finalResult) {
                     throw new Error("Donation request not found.");
@@ -92,7 +92,13 @@ const EditDonationRequest = () => {
                     requestMessage: finalResult.requestMessage,
                 });
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
             } finally {
                 setLoadingData(false);
             }
@@ -159,7 +165,7 @@ const EditDonationRequest = () => {
                 requestMessage,
             } = data;
 
-            console.log(recipientUpazila);
+            // console.log(recipientUpazila);
 
             /* Donation recipient location id and name */
             const [divisionId, ...divisionRest] = recipientDivision.split(" ");
@@ -188,7 +194,7 @@ const EditDonationRequest = () => {
                 requestMessage,
             };
 
-            console.log(donationUpdate);
+            // console.log(donationUpdate);
 
             const result = await axiosSecure.patch(
                 `/blood-donation/${id}`,

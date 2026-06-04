@@ -25,7 +25,13 @@ const useAxiosSecure = () => {
                 return config;
             },
             (error) => {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
                 return Promise.reject(error);
             },
         );
@@ -35,7 +41,13 @@ const useAxiosSecure = () => {
                 return response;
             },
             (error) => {
-                console.log(error);
+                // console.log(error);
+
+                toast.error(
+                    error?.response?.data?.message ||
+                        error?.message ||
+                        "Something went wrong",
+                );
                 const status = error.response?.status;
                 if (status === 401 || status === 403) {
                     logout().then(() => {

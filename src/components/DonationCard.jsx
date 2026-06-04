@@ -43,7 +43,7 @@ const DonationCard = ({ donation }) => {
             </div>
 
             {/* Info Section */}
-            <div className="space-y-4 flex-grow">
+            <div className="space-y-4 grow">
                 {/* Location */}
                 <div className="flex items-center gap-3">
                     <svg
