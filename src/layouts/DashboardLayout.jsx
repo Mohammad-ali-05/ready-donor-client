@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router";
 import useDbUser from "../hooks/useDbUser";
 import { PiUsersThree } from "react-icons/pi";
 import { LiaClipboardListSolid } from "react-icons/lia";
+import { CgProfile } from "react-icons/cg";
 
 const DashboardLayout = () => {
     const adminRole = ["admin"];
@@ -39,6 +40,22 @@ const DashboardLayout = () => {
                         </svg>
                         <span className="is-drawer-close:hidden">
                             My Dashboard
+                        </span>
+                    </button>
+                </NavLink>
+            </li>
+            <li>
+                <NavLink
+                    to={"/dashboard/profile"}
+                    className={({ isActive }) =>
+                        `text-[16px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-black"}`
+                    }>
+                    <button
+                        className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                        data-tip="My Profile">
+                        <CgProfile className="my-1.5 inline-block size-6" />
+                        <span className="is-drawer-close:hidden">
+                            My Profile
                         </span>
                     </button>
                 </NavLink>

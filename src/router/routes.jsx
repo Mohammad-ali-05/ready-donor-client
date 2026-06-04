@@ -20,6 +20,7 @@ import RoleRoute from "./RoleRoutes";
 import AllUsers from "../pages/dashboard/allUsers/AllUsers";
 import AllDonationRequests from "../pages/dashboard/allDoantionRequests/AllDonationRequests";
 import NotFound from "../pages/error/NotFound";
+import Profile from "../pages/dashboard/profile/Profile";
 
 const routes = createBrowserRouter([
     {
@@ -68,8 +69,10 @@ const routes = createBrowserRouter([
                         index: true,
                         element: <Navigate to={"my-dashboard"}></Navigate>,
                     },
-
-                    /* Donor and admin routes */
+                    {
+                        path: "profile",
+                        element: <Profile></Profile>,
+                    },
                     {
                         path: "my-dashboard",
                         element: <MyDashboard></MyDashboard>,
