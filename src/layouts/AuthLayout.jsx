@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 const AuthLayout = () => {
     return (
         <>
-            <header>
+            <header className="relative">
                 <Navbar></Navbar>
             </header>
             <Outlet></Outlet>
