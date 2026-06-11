@@ -6,6 +6,8 @@ import LatestDonationRequest from "./components/LatestDonationRequest";
 const Home = () => {
     return (
         <>
+            
+            <title>Home</title>
             <Banner></Banner>
             <LatestDonationRequest></LatestDonationRequest>
             <ContactUs></ContactUs>

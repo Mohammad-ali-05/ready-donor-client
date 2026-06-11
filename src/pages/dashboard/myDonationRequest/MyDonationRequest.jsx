@@ -152,7 +152,9 @@ const MyDonationRequest = () => {
     };
 
     return (
-        <div className="bg-base-100 p-6 rounded-lg shadow-md">
+        <>
+            <title>My Donation Requests</title>
+            <div className="bg-base-100 p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">
                 My Donation Requests{" "}
                 <span className="bg-linear-to-br from-[#B32346] to-[#46052D] bg-clip-text text-transparent">
@@ -403,6 +405,7 @@ const MyDonationRequest = () => {
                 </>
             )}
         </div>
+        </>
     );
 };
 

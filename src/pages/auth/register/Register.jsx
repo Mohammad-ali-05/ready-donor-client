@@ -173,260 +173,263 @@ const Register = () => {
     };
 
     return (
-        <section className="bg-linear-to-br from-error/10 to-error/20 py-20">
-            <div className="flex justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="card bg-base-100  w-full max-w-lg shrink-0 p-6">
-                    <div className="text-center mb-6">
-                        <h2 className="text-2xl mb-2">Join Save Lives</h2>
-                        <p className="text-[#717182] text-sm">
-                            Create your account and start making a difference in
-                            people's lives
-                        </p>
-                    </div>
-                    <form
-                        onSubmit={handleSubmit(handleFormSubmit)}
-                        className="card-body p-0">
-                        {/* User info */}
-                        <fieldset className="fieldset">
-                            {/* name */}
-                            <label
-                                htmlFor="name"
-                                className="text-sm font-medium text-base-content/60">
-                                Full Name *
-                            </label>
-                            <input
-                                {...register("name", {
-                                    required: "Name is required",
-                                    minLength: {
-                                        value: 3,
-                                        message:
-                                            "Name must be at least 3 characters",
-                                    },
-                                })}
-                                type="text"
-                                placeholder="Enter your full name"
-                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
-                            />
-                            {errors.name && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.name.message}
-                                </p>
-                            )}
-
-                            {/* email */}
-                            <label
-                                htmlFor="email"
-                                className="text-sm font-medium text-base-content/60">
-                                Email *
-                            </label>
-                            <input
-                                {...register("email", {
-                                    required: "Email is required",
-                                    pattern: {
-                                        value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                        message: "Enter a valid email",
-                                    },
-                                })}
-                                type="email"
-                                placeholder="Enter your full email"
-                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
-                            />
-                            {errors.email && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.email.message}
-                                </p>
-                            )}
-
-                            {/* image */}
-                            <label className="text-sm font-medium text-base-content/60">
-                                Image *
-                            </label>
-                            <input
-                                {...register("image", {
-                                    required: "Image is required",
-                                })}
-                                type="file"
-                                className="file-input file-input-bordered h-9 w-full bg-base-200 border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
-                            />
-                            {errors.image && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.image.message}
-                                </p>
-                            )}
-
-                            {/* blood type */}
-                            <label className="text-sm font-medium text-base-content/60">
-                                Blood type *
-                            </label>
-                            <select
-                                {...register("bloodGroup", {
-                                    required: "Blood group is required",
-                                })}
-                                defaultValue=""
-                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
-                                <option value="">All Blood Types</option>
-                                {bloodCategory.map((category, index) => (
-                                    <option key={index} value={category}>
-                                        {category}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.bloodGroup && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.bloodGroup.message}
-                                </p>
-                            )}
-                        </fieldset>
-                        {/* User location */}
-                        <fieldset className="fieldset">
-                            {/* Division */}
-
-                            <label className="text-sm font-medium text-base-content/60">
-                                Division *
-                            </label>
-                            <select
-                                {...register("division", {
-                                    required: "Division is required",
-                                })}
-                                defaultValue=""
-                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
-                                <option value="">Select Division</option>
-                                {divisionData.map((division) => (
-                                    <option
-                                        key={division.id}
-                                        value={`${division.id} ${division.name}`}>
-                                        {division.name}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.division && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.division.message}
-                                </p>
-                            )}
-
-                            {/* District */}
-                            <label className="text-sm font-medium text-base-content/60">
-                                District *
-                            </label>
-                            <select
-                                {...register("district", {
-                                    required: "District is required",
-                                })}
-                                defaultValue=""
-                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
-                                <option value="">Select District</option>
-                                {districts.map((district) => (
-                                    <option
-                                        key={district.id}
-                                        value={`${district.id} ${district.name}`}>
-                                        {district.name}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.district && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.district.message}
-                                </p>
-                            )}
-
-                            {/* Upazila */}
-                            <label className="text-sm font-medium text-base-content/60">
-                                Upazila *
-                            </label>
-                            <select
-                                {...register("upazila", {
-                                    required: "Upazila is required",
-                                })}
-                                defaultValue=""
-                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
-                                <option value="">Select Upazila</option>
-                                {upazilas.map((upazila) => (
-                                    <option
-                                        key={upazila.id}
-                                        value={`${upazila.id} ${upazila.name}`}>
-                                        {upazila.name}
-                                    </option>
-                                ))}
-                            </select>
-                            {errors.upazila && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.upazila.message}
-                                </p>
-                            )}
-                        </fieldset>
-                        {/* User password */}
-                        <fieldset className="fieldset">
-                            {/*Create Password */}
-                            <label
-                                htmlFor="password"
-                                className="text-sm font-medium text-base-content/60">
-                                Password *
-                            </label>
-                            <input
-                                {...register("password", {
-                                    required: "Password is required",
-                                    minLength: {
-                                        value: 6,
-                                        message:
-                                            "Password must be at least 6 characters",
-                                    },
-                                    pattern: {
-                                        value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
-                                        message:
-                                            "Password must contain uppercase, lowercase, number and special character",
-                                    },
-                                })}
-                                type="password"
-                                placeholder="Create your password"
-                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
-                            />
-                            {errors.password && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.password.message}
-                                </p>
-                            )}
-
-                            {/*Confirm Password */}
-                            <label
-                                htmlFor="confirmPassword"
-                                className="text-sm font-medium text-base-content/60">
-                                Confirm Password *
-                            </label>
-                            <input
-                                {...register("confirmPassword", {
-                                    required: "Please confirm password",
-                                    validate: (value) =>
-                                        value === watchPassword ||
-                                        "Passwords do not match",
-                                })}
-                                type="password"
-                                placeholder="Confirm your password"
-                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
-                            />
-                            {errors.confirmPassword && (
-                                <p className="text-red-500 text-sm mt-1">
-                                    {errors.confirmPassword.message}
-                                </p>
-                            )}
-                        </fieldset>
-                        <button className="text-lg text-white font-semibold  rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
-                            Register
-                        </button>
-                    </form>
-                    <Link to={"/auth/login"} state={location?.state}>
-                        <div className="text-center text-sm font-medium text-base-content/60 mt-4">
-                            Already have an account?{" "}
-                            <button
-                                type="button"
-                                className="text-[#8d1f3a] hover:underline">
-                                Login in here.
-                            </button>
+        <>
+            <title>Register</title>
+            <section className="bg-linear-to-br from-error/10 to-error/20 py-20">
+                <div className="flex justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="card bg-base-100  w-full max-w-lg shrink-0 p-6">
+                        <div className="text-center mb-6">
+                            <h2 className="text-2xl mb-2">Join Save Lives</h2>
+                            <p className="text-[#717182] text-sm">
+                                Create your account and start making a
+                                difference in people's lives
+                            </p>
                         </div>
-                    </Link>
+                        <form
+                            onSubmit={handleSubmit(handleFormSubmit)}
+                            className="card-body p-0">
+                            {/* User info */}
+                            <fieldset className="fieldset">
+                                {/* name */}
+                                <label
+                                    htmlFor="name"
+                                    className="text-sm font-medium text-base-content/60">
+                                    Full Name *
+                                </label>
+                                <input
+                                    {...register("name", {
+                                        required: "Name is required",
+                                        minLength: {
+                                            value: 3,
+                                            message:
+                                                "Name must be at least 3 characters",
+                                        },
+                                    })}
+                                    type="text"
+                                    placeholder="Enter your full name"
+                                    class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
+                                />
+                                {errors.name && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.name.message}
+                                    </p>
+                                )}
+
+                                {/* email */}
+                                <label
+                                    htmlFor="email"
+                                    className="text-sm font-medium text-base-content/60">
+                                    Email *
+                                </label>
+                                <input
+                                    {...register("email", {
+                                        required: "Email is required",
+                                        pattern: {
+                                            value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                                            message: "Enter a valid email",
+                                        },
+                                    })}
+                                    type="email"
+                                    placeholder="Enter your full email"
+                                    class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
+                                />
+                                {errors.email && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.email.message}
+                                    </p>
+                                )}
+
+                                {/* image */}
+                                <label className="text-sm font-medium text-base-content/60">
+                                    Image *
+                                </label>
+                                <input
+                                    {...register("image", {
+                                        required: "Image is required",
+                                    })}
+                                    type="file"
+                                    className="file-input file-input-bordered h-9 w-full bg-base-200 border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                />
+                                {errors.image && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.image.message}
+                                    </p>
+                                )}
+
+                                {/* blood type */}
+                                <label className="text-sm font-medium text-base-content/60">
+                                    Blood type *
+                                </label>
+                                <select
+                                    {...register("bloodGroup", {
+                                        required: "Blood group is required",
+                                    })}
+                                    defaultValue=""
+                                    className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
+                                    <option value="">All Blood Types</option>
+                                    {bloodCategory.map((category, index) => (
+                                        <option key={index} value={category}>
+                                            {category}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.bloodGroup && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.bloodGroup.message}
+                                    </p>
+                                )}
+                            </fieldset>
+                            {/* User location */}
+                            <fieldset className="fieldset">
+                                {/* Division */}
+
+                                <label className="text-sm font-medium text-base-content/60">
+                                    Division *
+                                </label>
+                                <select
+                                    {...register("division", {
+                                        required: "Division is required",
+                                    })}
+                                    defaultValue=""
+                                    className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
+                                    <option value="">Select Division</option>
+                                    {divisionData.map((division) => (
+                                        <option
+                                            key={division.id}
+                                            value={`${division.id} ${division.name}`}>
+                                            {division.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.division && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.division.message}
+                                    </p>
+                                )}
+
+                                {/* District */}
+                                <label className="text-sm font-medium text-base-content/60">
+                                    District *
+                                </label>
+                                <select
+                                    {...register("district", {
+                                        required: "District is required",
+                                    })}
+                                    defaultValue=""
+                                    className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
+                                    <option value="">Select District</option>
+                                    {districts.map((district) => (
+                                        <option
+                                            key={district.id}
+                                            value={`${district.id} ${district.name}`}>
+                                            {district.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.district && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.district.message}
+                                    </p>
+                                )}
+
+                                {/* Upazila */}
+                                <label className="text-sm font-medium text-base-content/60">
+                                    Upazila *
+                                </label>
+                                <select
+                                    {...register("upazila", {
+                                        required: "Upazila is required",
+                                    })}
+                                    defaultValue=""
+                                    className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
+                                    <option value="">Select Upazila</option>
+                                    {upazilas.map((upazila) => (
+                                        <option
+                                            key={upazila.id}
+                                            value={`${upazila.id} ${upazila.name}`}>
+                                            {upazila.name}
+                                        </option>
+                                    ))}
+                                </select>
+                                {errors.upazila && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.upazila.message}
+                                    </p>
+                                )}
+                            </fieldset>
+                            {/* User password */}
+                            <fieldset className="fieldset">
+                                {/*Create Password */}
+                                <label
+                                    htmlFor="password"
+                                    className="text-sm font-medium text-base-content/60">
+                                    Password *
+                                </label>
+                                <input
+                                    {...register("password", {
+                                        required: "Password is required",
+                                        minLength: {
+                                            value: 6,
+                                            message:
+                                                "Password must be at least 6 characters",
+                                        },
+                                        pattern: {
+                                            value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).+$/,
+                                            message:
+                                                "Password must contain uppercase, lowercase, number and special character",
+                                        },
+                                    })}
+                                    type="password"
+                                    placeholder="Create your password"
+                                    class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
+                                />
+                                {errors.password && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.password.message}
+                                    </p>
+                                )}
+
+                                {/*Confirm Password */}
+                                <label
+                                    htmlFor="confirmPassword"
+                                    className="text-sm font-medium text-base-content/60">
+                                    Confirm Password *
+                                </label>
+                                <input
+                                    {...register("confirmPassword", {
+                                        required: "Please confirm password",
+                                        validate: (value) =>
+                                            value === watchPassword ||
+                                            "Passwords do not match",
+                                    })}
+                                    type="password"
+                                    placeholder="Confirm your password"
+                                    class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
+                                />
+                                {errors.confirmPassword && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.confirmPassword.message}
+                                    </p>
+                                )}
+                            </fieldset>
+                            <button className="text-lg text-white font-semibold  rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
+                                Register
+                            </button>
+                        </form>
+                        <Link to={"/auth/login"} state={location?.state}>
+                            <div className="text-center text-sm font-medium text-base-content/60 mt-4">
+                                Already have an account?{" "}
+                                <button
+                                    type="button"
+                                    className="text-[#8d1f3a] hover:underline">
+                                    Login in here.
+                                </button>
+                            </div>
+                        </Link>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 

@@ -20,104 +20,125 @@ const Profile = () => {
     // };
 
     return (
-        <section className="space-y-6">
-            {/* Profile Header */}
-            <div className="bg-base-100 rounded-lg shadow-md p-6">
-                <div className="flex flex-col md:flex-row items-center gap-6">
-                    <img
-                        src={dbUser.image}
-                        alt={dbUser.name}
-                        className="w-28 h-28 rounded-full object-cover border-4 border-red-100"
-                    />
+        <>
+            <title>My Profile</title>
+            <section className="space-y-6">
+                {/* Profile Header */}
+                <div className="bg-base-100 rounded-lg shadow-md p-6">
+                    <div className="flex flex-col md:flex-row items-center gap-6">
+                        <img
+                            src={dbUser.image}
+                            alt={dbUser.name}
+                            className="w-28 h-28 rounded-full object-cover border-4 border-red-100"
+                        />
 
-                    <div className="flex-1 text-center md:text-left">
-                        <h1 className="text-3xl font-bold">{dbUser.name}</h1>
+                        <div className="flex-1 text-center md:text-left">
+                            <h1 className="text-3xl font-bold">
+                                {dbUser.name}
+                            </h1>
 
-                        <p className="text-base-content/50 mt-1">
-                            Blood Donor Profile
-                        </p>
+                            <p className="text-base-content/50 mt-1">
+                                Blood Donor Profile
+                            </p>
 
-                        <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
-                            <span className="badge badge-error text-white">
-                                {dbUser.bloodGroup}
-                            </span>
+                            <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-4">
+                                <span className="badge badge-error text-white">
+                                    {dbUser.bloodGroup}
+                                </span>
 
-                            <span className="badge badge-primary text-white capitalize">
+                                <span className="badge badge-primary text-white capitalize">
+                                    {dbUser.role}
+                                </span>
+
+                                <span className="badge badge-success text-white capitalize">
+                                    {dbUser.status}
+                                </span>
+                            </div>
+                        </div>
+                        {/* button will go here */}
+                    </div>
+                </div>
+
+                {/* Personal Information */}
+                <div className="bg-base-100 rounded-lg shadow-md p-6">
+                    <h2 className="text-2xl font-bold mb-6">
+                        Personal Information
+                    </h2>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                Email
+                            </p>
+
+                            <p className="font-medium">{dbUser.email}</p>
+                        </div>
+
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                Blood Group
+                            </p>
+
+                            <p className="font-medium">{dbUser.bloodGroup}</p>
+                        </div>
+
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                Division
+                            </p>
+
+                            <p className="font-medium">{dbUser.divisionName}</p>
+                        </div>
+
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                District
+                            </p>
+
+                            <p className="font-medium">{dbUser.districtName}</p>
+                        </div>
+
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                Upazila
+                            </p>
+
+                            <p className="font-medium">{dbUser.upazilaName}</p>
+                        </div>
+
+                        <div>
+                            <p className="text-sm text-base-content/50">Role</p>
+
+                            <p className="font-medium capitalize">
                                 {dbUser.role}
-                            </span>
+                            </p>
+                        </div>
 
-                            <span className="badge badge-success text-white capitalize">
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                Status
+                            </p>
+
+                            <p className="font-medium capitalize">
                                 {dbUser.status}
-                            </span>
+                            </p>
+                        </div>
+
+                        <div>
+                            <p className="text-sm text-base-content/50">
+                                Joined
+                            </p>
+
+                            <p className="font-medium">
+                                {new Date(
+                                    dbUser.createdAt,
+                                ).toLocaleDateString()}
+                            </p>
                         </div>
                     </div>
-                    {/* button will go here */}
                 </div>
-            </div>
-
-            {/* Personal Information */}
-            <div className="bg-base-100 rounded-lg shadow-md p-6">
-                <h2 className="text-2xl font-bold mb-6">
-                    Personal Information
-                </h2>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                        <p className="text-sm text-base-content/50">Email</p>
-
-                        <p className="font-medium">{dbUser.email}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">
-                            Blood Group
-                        </p>
-
-                        <p className="font-medium">{dbUser.bloodGroup}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">Division</p>
-
-                        <p className="font-medium">{dbUser.divisionName}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">District</p>
-
-                        <p className="font-medium">{dbUser.districtName}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">Upazila</p>
-
-                        <p className="font-medium">{dbUser.upazilaName}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">Role</p>
-
-                        <p className="font-medium capitalize">{dbUser.role}</p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">Status</p>
-
-                        <p className="font-medium capitalize">
-                            {dbUser.status}
-                        </p>
-                    </div>
-
-                    <div>
-                        <p className="text-sm text-base-content/50">Joined</p>
-
-                        <p className="font-medium">
-                            {new Date(dbUser.createdAt).toLocaleDateString()}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </section>
+        </>
     );
 };
 

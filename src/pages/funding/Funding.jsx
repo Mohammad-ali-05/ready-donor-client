@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Funding = () => {
     return (
-        <div>
-            
-        </div>
+        <>
+            <title>Funding</title>
+            <div></div>
+        </>
     );
 };
 
