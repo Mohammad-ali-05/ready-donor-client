@@ -15,7 +15,7 @@ import { BiSolidDonateBlood } from "react-icons/bi";
 
 const Banner = () => {
     return (
-        <section className="relative bg-linear-to-br from-red-50 to-red-100 py-20">
+        <section className="bg-linear-to-br from-error/10 to-error/20 py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div className="flex flex-col justify-center items-start">
@@ -25,7 +25,7 @@ const Banner = () => {
                                 Blood Donation
                             </span>
                         </h1>
-                        <p className="text-lg text-gray-700 font-medium mb-8">
+                        <p className="text-lg text-base-content/60 font-medium mb-8">
                             Every donation can save up to three lives. Join our
                             community of heroes and make a different tomorrow.
                             Your blood donation could be someone's second chance
@@ -33,13 +33,13 @@ const Banner = () => {
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <Link to={"/find-donor"}>
-                                <button className="flex gap-2 items-center text-lg text-white font-semibold bg-linear-to-r rounded-md from-[#B32346] to-[#46052D] h-10 px-4 hover:opacity-85">
+                                <button className="flex gap-2 items-center text-lg text-white font-semibold bg-linear-to-r rounded-lg from-[#B32346] to-[#46052D] h-10 px-4 hover:opacity-85">
                                     <FaHeartbeat />
                                     Find a donor
                                 </button>
                             </Link>
                             <Link to={"/auth/register"}>
-                                <button className="flex gap-2 items-center text-lg text-black font-semibold rounded-md border border-gray-300 bg-white h-10 px-4 hover:opacity-70">
+                                <button className="flex gap-2 items-center text-lg text-base-content font-semibold rounded-lg border border-gray-300 bg-base-100 h-10 px-4 hover:opacity-70">
                                     <BiSolidDonateBlood />
                                     Become a donor
                                 </button>
@@ -57,12 +57,12 @@ const Banner = () => {
                             }}
                             onClick={(swiper) => swiper.slideNext()}
                             modules={[Autoplay, EffectFade]}
-                            className="w-full h-full rounded-3xl">
+                            className="w-full h-full rounded-lg">
                             <SwiperSlide>
                                 <img
                                     src={heroImg1}
                                     alt="Blood donation"
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full object-cover rounded-lg"
                                 />
                             </SwiperSlide>
 
@@ -70,7 +70,7 @@ const Banner = () => {
                                 <img
                                     src={heroImg2}
                                     alt="Blood donation"
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full object-cover rounded-lg"
                                 />
                             </SwiperSlide>
 
@@ -78,7 +78,7 @@ const Banner = () => {
                                 <img
                                     src={heroImg3}
                                     alt="Blood donation"
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full object-cover rounded-lg"
                                 />
                             </SwiperSlide>
 
@@ -86,7 +86,7 @@ const Banner = () => {
                                 <img
                                     src={heroImg4}
                                     alt="Blood donation"
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full object-cover rounded-lg"
                                 />
                             </SwiperSlide>
 
@@ -94,7 +94,7 @@ const Banner = () => {
                                 <img
                                     src={heroImg5}
                                     alt="Blood donation"
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full object-cover rounded-lg"
                                 />
                             </SwiperSlide>
 
@@ -102,7 +102,7 @@ const Banner = () => {
                                 <img
                                     src={heroImg6}
                                     alt="Blood donation"
-                                    className="w-full h-full object-cover rounded-3xl"
+                                    className="w-full h-full object-cover rounded-lg"
                                 />
                             </SwiperSlide>
                         </Swiper>

@@ -22,20 +22,20 @@ const DonationCard = ({ donation }) => {
     };
 
     return (
-        <div className="bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-5 h-full flex flex-col">
+        <div className="bg-base-100 border border-gray-100 rounded-lg shadow-md hover:shadow-md transition-all duration-200 p-5 h-full flex flex-col">
             {/* Header */}
             <div className="flex items-start justify-between gap-4 mb-5">
                 <div>
-                    <p className="text-xs uppercase tracking-wider text-gray-500 font-medium mb-1">
+                    <p className="text-xs uppercase tracking-wider text-base-content/50 font-medium mb-1">
                         Blood Request For
                     </p>
 
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-base-content">
                         {donation.recipientName}
                     </h3>
                 </div>
 
-                <div className="w-14 h-14 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center shrink-0">
+                <div className="w-14 h-14 rounded-lg bg-red-50 border border-red-200 flex items-center justify-center shrink-0">
                     <span className="font-bold text-red-600 text-lg">
                         {donation.bloodGroup}
                     </span>
@@ -48,7 +48,7 @@ const DonationCard = ({ donation }) => {
                 <div className="flex items-center gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 text-gray-500 shrink-0"
+                        className="w-4 h-4 text-base-content/50 shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -66,9 +66,9 @@ const DonationCard = ({ donation }) => {
                     </svg>
 
                     <div>
-                        <p className="text-xs text-gray-500">Location</p>
+                        <p className="text-xs text-base-content/50">Location</p>
 
-                        <p className="text-sm font-medium text-gray-800">
+                        <p className="text-sm font-medium text-base-content">
                             {donation.upazilaName}, {donation.districtName}
                         </p>
                     </div>
@@ -78,7 +78,7 @@ const DonationCard = ({ donation }) => {
                 <div className="flex items-center gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 text-gray-500 shrink-0"
+                        className="w-4 h-4 text-base-content/50 shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -91,9 +91,9 @@ const DonationCard = ({ donation }) => {
                     </svg>
 
                     <div>
-                        <p className="text-xs text-gray-500">Hospital</p>
+                        <p className="text-xs text-base-content/50">Hospital</p>
 
-                        <p className="text-sm font-medium text-gray-800">
+                        <p className="text-sm font-medium text-base-content">
                             {donation.hospitalName}
                         </p>
                     </div>
@@ -103,7 +103,7 @@ const DonationCard = ({ donation }) => {
                 <div className="flex items-center gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 text-gray-500 shrink-0"
+                        className="w-4 h-4 text-base-content/50 shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -115,9 +115,11 @@ const DonationCard = ({ donation }) => {
                     </svg>
 
                     <div>
-                        <p className="text-xs text-gray-500">Donation Date</p>
+                        <p className="text-xs text-base-content/50">
+                            Donation Date
+                        </p>
 
-                        <p className="text-sm font-medium text-gray-800">
+                        <p className="text-sm font-medium text-base-content">
                             {formatDate(donation.donationDate)}
                         </p>
                     </div>
@@ -127,7 +129,7 @@ const DonationCard = ({ donation }) => {
                 <div className="flex items-center gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="w-4 h-4 text-gray-500 shrink-0"
+                        className="w-4 h-4 text-base-content/50 shrink-0"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -137,9 +139,11 @@ const DonationCard = ({ donation }) => {
                     </svg>
 
                     <div>
-                        <p className="text-xs text-gray-500">Donation Time</p>
+                        <p className="text-xs text-base-content/50">
+                            Donation Time
+                        </p>
 
-                        <p className="text-sm font-medium text-gray-800">
+                        <p className="text-sm font-medium text-base-content">
                             {formatTime(donation.donationTime)}
                         </p>
                     </div>
@@ -147,15 +151,9 @@ const DonationCard = ({ donation }) => {
             </div>
 
             {/* Footer */}
-            <div className="border-t border-gray-100 mt-5 pt-4">
-                <p className="text-xs text-gray-500 mb-3">Requested by</p>
-
-                <p className="text-sm font-medium text-gray-800">
-                    {donation.requesterName}
-                </p>
-
+            <div>
                 <Link
-                    to={`/dashboard/blood-donation/details/${donation._id}`}
+                    to={`/blood-donations/details/${donation._id}`}
                     className="mt-4 h-11 rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] text-white font-medium flex items-center justify-center hover:opacity-90 transition">
                     View Details
                 </Link>

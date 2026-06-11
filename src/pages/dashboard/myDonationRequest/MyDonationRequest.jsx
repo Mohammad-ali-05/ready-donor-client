@@ -152,7 +152,7 @@ const MyDonationRequest = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-base-100 p-6 rounded-lg shadow-md">
             <h2 className="text-xl font-semibold mb-4">
                 My Donation Requests{" "}
                 <span className="bg-linear-to-br from-[#B32346] to-[#46052D] bg-clip-text text-transparent">
@@ -169,7 +169,7 @@ const MyDonationRequest = () => {
                             setStatusFilter(status);
                             setCurrentPage(0);
                         }}
-                        className={`px-4 py-2 rounded-md border text-sm ${
+                        className={`px-4 py-2 rounded-lg border text-sm ${
                             statusFilter === status
                                 ? "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"
                                 : "hover:text-white hover:bg-linear-to-r hover:from-[#B32346] hover:to-[#46052D]"
@@ -186,7 +186,7 @@ const MyDonationRequest = () => {
                 <>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm">
-                            <thead className="bg-gray-100 text-left">
+                            <thead className="bg-base-200 text-left">
                                 <tr>
                                     <th className="p-3">Recipient</th>
                                     <th className="p-3">Location</th>
@@ -226,7 +226,7 @@ const MyDonationRequest = () => {
                                         {/* Status */}
                                         <td className="p-3">
                                             <span
-                                                className={`px-2 py-1 text-xs rounded ${
+                                                className={`px-2 py-1 text-xs rounded-lg ${
                                                     req.status === "pending"
                                                         ? "bg-yellow-100 text-yellow-700"
                                                         : req.status ===
@@ -245,7 +245,7 @@ const MyDonationRequest = () => {
                                         <td className="p-3">
                                             {req.status === "inprogress" ||
                                             req.status === "done" ? (
-                                                <div className="text-sm text-gray-500 mt-1">
+                                                <div className="text-sm text-base-content/50 mt-1">
                                                     <p>
                                                         <span className="font-semibold">
                                                             Donor Name:
@@ -266,66 +266,89 @@ const MyDonationRequest = () => {
                                                     }
                                                 </div>
                                             ) : (
-                                                <div className="text-xs text-gray-500 mt-1">
+                                                <div className="text-xs text-base-content/50 mt-1">
                                                     {"No donor found"}
                                                 </div>
                                             )}
                                         </td>
 
                                         {/* Actions */}
-                                        <td className="p-3 grid grid-cols-1 lg:grid-cols-2 gap-2">
-                                            {/* View */}
-                                            <Link
-                                                to={`/dashboard/blood-donation/details/${req._id}`}
-                                                className="col-span-2">
-                                                <button className="px-2 py-1 w-full text-xs bg-gray-100 rounded">
-                                                    View
-                                                </button>
-                                            </Link>
+                                        <td className="p-3">
+                                            <div className="dropdown dropdown-end">
+                                                <div
+                                                    tabIndex={0}
+                                                    role="button"
+                                                    className="btn btn-sm btn-ghost">
+                                                    ⋮
+                                                </div>
 
-                                            {/* Edit */}
-                                            <Link
-                                                to={`/dashboard/my-donation-requests/edit/${req._id}`}>
-                                                <button className="px-2 w-full py-1 text-xs bg-blue-100 text-blue-700 rounded">
-                                                    Edit
-                                                </button>
-                                            </Link>
+                                                <ul
+                                                    tabIndex={0}
+                                                    className="dropdown-content menu bg-base-100 rounded-lg z-50 w-52 p-2 shadow border">
+                                                    {/* View */}
+                                                    <li>
+                                                        <Link
+                                                            to={`/blood-donations/details/${req._id}`}
+                                                            className="btn my-0.5 w-full text-xs bg-base-100 border">
+                                                            View
+                                                        </Link>
+                                                    </li>
 
-                                            {/* Delete */}
-                                            <button
-                                                onClick={() =>
-                                                    handleRequestDelete(req._id)
-                                                }
-                                                className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
-                                                Delete
-                                            </button>
+                                                    {/* Edit */}
+                                                    <li>
+                                                        <Link
+                                                            to={`/dashboard/my-donation-requests/edit/${req._id}`}
+                                                            className="btn my-0.5 w-full text-xs bg-blue-100 text-blue-700">
+                                                            Edit
+                                                        </Link>
+                                                    </li>
 
-                                            {/* Done or cancel button when request inprogress */}
-                                            {req.status === "inprogress" && (
-                                                <>
-                                                    <button
-                                                        onClick={() =>
-                                                            handleUpdateStatus(
-                                                                req._id,
-                                                                "done",
-                                                            )
-                                                        }
-                                                        className="px-2 py-1 w-full text-xs bg-green-100 text-green-700 rounded">
-                                                        Done
-                                                    </button>
+                                                    {/* Delete */}
+                                                    <li>
+                                                        <button
+                                                            onClick={() =>
+                                                                handleRequestDelete(
+                                                                    req._id,
+                                                                )
+                                                            }
+                                                            className="btn my-0.5 w-full text-xs bg-red-100 text-red-700">
+                                                            Delete
+                                                        </button>
+                                                    </li>
 
-                                                    <button
-                                                        onClick={() =>
-                                                            handleUpdateStatus(
-                                                                req._id,
-                                                                "canceled",
-                                                            )
-                                                        }
-                                                        className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
-                                                        Cancel
-                                                    </button>
-                                                </>
-                                            )}
+                                                    {/* Done / Cancel (only when inprogress) */}
+                                                    {req.status ===
+                                                        "inprogress" && (
+                                                        <>
+                                                            <li>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        handleUpdateStatus(
+                                                                            req._id,
+                                                                            "done",
+                                                                        )
+                                                                    }
+                                                                    className="btn my-0.5 w-full text-xs bg-green-100 text-green-700">
+                                                                    Done
+                                                                </button>
+                                                            </li>
+
+                                                            <li>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        handleUpdateStatus(
+                                                                            req._id,
+                                                                            "canceled",
+                                                                        )
+                                                                    }
+                                                                    className="btn my-0.5 w-full text-xs bg-red-100 text-red-700">
+                                                                    Cancel
+                                                                </button>
+                                                            </li>
+                                                        </>
+                                                    )}
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
@@ -333,7 +356,7 @@ const MyDonationRequest = () => {
                                     <tr>
                                         <td
                                             colSpan={"8"}
-                                            className="text-center py-20 text-gray-500">
+                                            className="text-center py-20 text-base-content/50">
                                             No donation requests found
                                         </td>
                                     </tr>
@@ -361,7 +384,7 @@ const MyDonationRequest = () => {
                                         <button
                                             onClick={() => setCurrentPage(i)}
                                             key={i}
-                                            className={`btn rounded-md ${currentPage === i && "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"}`}>
+                                            className={`btn rounded-lg ${currentPage === i && "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"}`}>
                                             {i + 1}
                                         </button>
                                     )),

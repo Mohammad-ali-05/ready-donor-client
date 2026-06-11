@@ -13,7 +13,7 @@ const BloodDonations = () => {
     const [donationRequestCount, setDonationRequestCount] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
     const [currentPage, setCurrentPage] = useState(0);
-    const limit = 9;
+    const limit = 12;
 
     // Custom hooks
     const axios = useAxios();
@@ -47,13 +47,13 @@ const BloodDonations = () => {
     }, [axios, currentPage]);
 
     return (
-        <section className="min-h-screen bg-gray-50 py-12">
+        <section className="min-h-screen bg-base-200 py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-8">
-                    <h1 className="text-gray-900 text-2xl font-semibold md:text-3xl text-center mb-5">
+                    <h1 className="text-base-content text-2xl font-semibold md:text-3xl text-center mb-5">
                         Find Blood Donors
                     </h1>
-                    <p className="md:text-lg font-medium text-gray-600 max-w-250 w-full text-center mx-auto">
+                    <p className="md:text-lg font-medium text-base-content/60 max-w-250 w-full text-center mx-auto">
                         Search our database of registered blood donors. Connect
                         with donors who match your requirements.
                     </p>
@@ -61,11 +61,11 @@ const BloodDonations = () => {
             </div>
             <>
                 {isLoading ? (
-                    <div className="bg-white flex justify-center items-center shadow-sm rounded-xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-55 w-full">
+                    <div className="bg-base-100 flex justify-center items-center shadow-md rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-55 w-full">
                         <Loading></Loading>
                     </div>
                 ) : donorCount ? (
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {allDonations?.map((donation) => (
                             <DonationCard
                                 key={donation._id}
@@ -75,7 +75,7 @@ const BloodDonations = () => {
                     </div>
                 ) : (
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                        <p className="bg-white rounded-xl shadow-sm p-6 mb-8 text-center py-30 text-gray-500">
+                        <p className="bg-base-100 rounded-lg shadow-md p-6 mb-8 text-center py-30 text-base-content/50">
                             No donation requests found
                         </p>
                     </div>
@@ -98,7 +98,7 @@ const BloodDonations = () => {
                                 <button
                                     onClick={() => setCurrentPage(i)}
                                     key={i}
-                                    className={`btn rounded-md ${currentPage === i && "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"}`}>
+                                    className={`btn rounded-lg ${currentPage === i && "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"}`}>
                                     {i + 1}
                                 </button>
                             )),

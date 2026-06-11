@@ -9,13 +9,13 @@ const FindDonor = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [donorCount, setDonorCount] = useState(0);
     return (
-        <section className="min-h-screen bg-gray-50 py-12">
+        <section className="min-h-screen bg-base-200 py-12">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="mb-8">
-                    <h1 className="text-gray-900 text-2xl font-semibold md:text-3xl text-center mb-5">
+                    <h1 className="text-base-content text-2xl font-semibold md:text-3xl text-center mb-5">
                         Find Blood Donors
                     </h1>
-                    <p className="md:text-lg font-medium text-gray-600 max-w-250 w-full text-center mx-auto">
+                    <p className="md:text-lg font-medium text-base-content/60 max-w-250 w-full text-center mx-auto">
                         Search our database of registered blood donors. Connect
                         with donors who match your requirements.
                     </p>
@@ -27,7 +27,7 @@ const FindDonor = () => {
                     setIsLoading={setIsLoading}></DonorFilter>
             </div>
             {isLoading ? (
-                <div className="bg-white flex justify-center items-center shadow-sm rounded-xl max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-30 w-full">
+                <div className="bg-base-100 flex justify-center items-center shadow-md rounded-lg max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-30 w-full">
                     <Loading></Loading>
                 </div>
             ) : donorCount ? (
@@ -38,7 +38,7 @@ const FindDonor = () => {
                 </div>
             ) : (
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                    <p className="bg-white rounded-xl shadow-sm p-6 mb-8 text-center py-30 text-gray-500">
+                    <p className="bg-base-100 rounded-lg shadow-md p-6 mb-8 text-center py-30 text-base-content/50">
                         No donation requests found
                     </p>
                 </div>

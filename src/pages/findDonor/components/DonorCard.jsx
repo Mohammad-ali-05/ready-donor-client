@@ -10,10 +10,10 @@ const statusStyles = {
 const DonorCard = ({ donor }) => {
     const statusStyle =
         statusStyles[donor?.status] ||
-        "bg-gray-50 text-gray-700 border-gray-200";
+        "bg-base-200 text-base-content/60 border-gray-200";
 
     return (
-        <div className="bg-white border border-gray-100 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 p-5 flex flex-col h-full">
+        <div className="bg-base-100 border border-gray-100 rounded-lg shadow-md hover:shadow-md transition-all duration-200 p-5 flex flex-col h-full">
             {/* Header */}
             <div className="flex items-start justify-between gap-4 mb-5">
                 {/* Left: avatar + identity */}
@@ -25,11 +25,13 @@ const DonorCard = ({ donor }) => {
                     />
 
                     <div>
-                        <h2 className="text-base font-semibold text-gray-900">
+                        <h2 className="text-base font-semibold text-base-content">
                             {donor?.name}
                         </h2>
 
-                        <p className="text-xs text-gray-500">{donor?.email}</p>
+                        <p className="text-xs text-base-content/50">
+                            {donor?.email}
+                        </p>
                     </div>
                 </div>
 
@@ -48,12 +50,14 @@ const DonorCard = ({ donor }) => {
                     {/* Location */}
                     <div className="flex items-center gap-3">
                         <span>
-                            <HiOutlineLocationMarker className="font-blood text-2xl text-gray-600" />
+                            <HiOutlineLocationMarker className="font-blood text-2xl text-base-content/60" />
                         </span>
 
                         <div>
-                            <p className="text-xs text-gray-500">Location</p>
-                            <p className="text-sm font-medium text-gray-800">
+                            <p className="text-xs text-base-content/50">
+                                Location
+                            </p>
+                            <p className="text-sm font-medium text-base-content">
                                 {donor?.districtName} · {donor?.upazilaName}
                             </p>
                         </div>
@@ -61,13 +65,15 @@ const DonorCard = ({ donor }) => {
 
                     {/* Division */}
                     <div className="flex items-center gap-3">
-                        <span className="font-blood text-2xl text-gray-600">
+                        <span className="font-blood text-2xl text-base-content/60">
                             <LuHouse />
                         </span>
 
                         <div>
-                            <p className="text-xs text-gray-500">Division</p>
-                            <p className="text-sm font-medium text-gray-800">
+                            <p className="text-xs text-base-content/50">
+                                Division
+                            </p>
+                            <p className="text-sm font-medium text-base-content">
                                 {donor?.divisionName}
                             </p>
                         </div>
@@ -75,13 +81,15 @@ const DonorCard = ({ donor }) => {
 
                     {/* Joined date */}
                     <div className="flex items-center gap-3">
-                        <span className="font-blood text-2xl text-gray-600">
+                        <span className="font-blood text-2xl text-base-content/60">
                             <LuCalendarDays />
                         </span>
 
                         <div>
-                            <p className="text-xs text-gray-500">Joined</p>
-                            <p className="text-sm font-medium text-gray-800">
+                            <p className="text-xs text-base-content/50">
+                                Joined
+                            </p>
+                            <p className="text-sm font-medium text-base-content">
                                 {new Date(
                                     donor?.createdAt,
                                 )?.toLocaleDateString()}
@@ -92,7 +100,7 @@ const DonorCard = ({ donor }) => {
 
                 {/* Blood group highlight */}
                 <div className="mb-5 flex items-center justify-between">
-                    <div className="w-14 h-14 rounded-xl bg-red-50 border border-red-200 flex items-center justify-center">
+                    <div className="w-14 h-14 rounded-lg bg-red-50 border border-red-200 flex items-center justify-center">
                         <span className="text-red-600 font-bold text-lg">
                             {donor?.bloodGroup}
                         </span>

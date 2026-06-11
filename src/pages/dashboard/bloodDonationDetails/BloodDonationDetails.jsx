@@ -1,20 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { GoDotFill } from "react-icons/go";
 import DonateBloodModal from "./components/DonateBloodModal";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 const BloodDonationDetails = () => {
     // React hooks
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
     const [donationDetails, setDonationDetails] = useState(null);
     const [status, setStatus] = useState(null);
     const [updatedDonor, setUpdatedDonor] = useState(false);
     const modalRef = useRef(null);
 
     // Custom hooks
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
@@ -57,6 +60,12 @@ const BloodDonationDetails = () => {
 
     // Function to open modal
     const openModal = () => {
+        if (!user) {
+            toast.info("Login to donate blood");
+            navigate("/auth/login", {
+                state: location.pathname,
+            });
+        }
         modalRef.current?.showModal();
     };
 
@@ -66,7 +75,7 @@ const BloodDonationDetails = () => {
                 {/* Back link */}
                 <button
                     onClick={() => navigate(-1)}
-                    className="inline-flex items-center gap-1.5  text-sm font-medium text-gray-700  hover:text-[#46052D] mb-6 transition-colors no-underline">
+                    className="inline-flex items-center gap-1.5  text-sm font-medium text-base-content/60  hover:text-[#46052D] mb-6 transition-colors no-underline">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="w-3.5 h-3.5"
@@ -84,17 +93,17 @@ const BloodDonationDetails = () => {
                 </button>
 
                 {/* Page header */}
-                <div className="flex items-start justify-between gap-4 mb-6 bg-white border shadow-sm border-gray-100 rounded-xl p-5 flex-wrap">
+                <div className="flex items-start justify-between gap-4 mb-6 bg-base-100 border shadow-md border-gray-100 rounded-lg p-5 flex-wrap">
                     <div className="flex items-center gap-3">
                         <div className="w-13 h-13 shrink-0 rounded-full bg-red-50 border border-red-100 flex items-center justify-center text-red-500 font-semibold text-sm">
                             {donationDetails?.bloodGroup}
                         </div>
                         <div>
-                            <h1 className="text-xl font-semibold text-gray-900 leading-snug">
+                            <h1 className="text-xl font-semibold text-base-content leading-snug">
                                 Blood request for{" "}
                                 {donationDetails?.recipientName}
                             </h1>
-                            <p className="text-sm font-medium text-gray-700 mt-0.5">
+                            <p className="text-sm font-medium text-base-content/60 mt-0.5">
                                 Requested by {donationDetails?.requesterName}{" "}
                                 <GoDotFill className="inline text-xs" />{" "}
                                 {donationDetails?.upazilaName},{" "}
@@ -126,8 +135,8 @@ const BloodDonationDetails = () => {
                 </div>
 
                 {/* Recipient & blood details card */}
-                <div className="bg-white border shadow-sm border-gray-100 rounded-xl p-5 mb-4">
-                    <p className="text-sm font-medium text-gray-700 uppercase tracking-widest mb-4">
+                <div className="bg-base-100 border shadow-md border-gray-100 rounded-lg p-5 mb-4">
+                    <p className="text-sm font-medium text-base-content/60 uppercase tracking-widest mb-4">
                         Recipient & blood details
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
@@ -136,7 +145,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3 border-b border-gray-100">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -148,10 +157,10 @@ const BloodDonationDetails = () => {
                                     />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Recipient name
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.recipientName}
                                     </p>
                                 </div>
@@ -171,7 +180,7 @@ const BloodDonationDetails = () => {
                                     />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Blood group
                                     </p>
                                     <p className="text-sm font-semibold text-red-500">
@@ -182,7 +191,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3 border-b border-gray-100">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -200,10 +209,10 @@ const BloodDonationDetails = () => {
                                     <line x1="3" y1="10" x2="21" y2="10" />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Donation date
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {formatDate(
                                             donationDetails?.donationDate,
                                         )}
@@ -213,7 +222,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -222,10 +231,10 @@ const BloodDonationDetails = () => {
                                     <polyline points="12 6 12 12 16 14" />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Donation time
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {formatTime(
                                             donationDetails?.donationTime,
                                         )}
@@ -238,7 +247,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3 border-b border-gray-100">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -250,10 +259,10 @@ const BloodDonationDetails = () => {
                                     />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Hospital
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.hospitalName}
                                     </p>
                                 </div>
@@ -261,7 +270,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3 border-b border-gray-100">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -278,10 +287,10 @@ const BloodDonationDetails = () => {
                                     />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Division
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.divisionName}
                                     </p>
                                 </div>
@@ -289,7 +298,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3 border-b border-gray-100">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -297,10 +306,10 @@ const BloodDonationDetails = () => {
                                     <polygon points="3 11 22 2 13 21 11 13 3 11" />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         District / Upazila
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.districtName} ·{" "}
                                         {donationDetails?.upazilaName}
                                     </p>
@@ -309,7 +318,7 @@ const BloodDonationDetails = () => {
                             <div className="flex items-center gap-3 py-3">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     fill="none"
                                     viewBox="0 0 24 24"
                                     stroke="currentColor"
@@ -322,10 +331,10 @@ const BloodDonationDetails = () => {
                                     <polyline points="9 22 9 12 15 12 15 22" />
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Full address
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.fullAddress}
                                     </p>
                                 </div>
@@ -336,15 +345,15 @@ const BloodDonationDetails = () => {
 
                 {/* Donor info */}
                 {(status === "inprogress" || status === "done") && (
-                    <div className="bg-white border shadow-sm border-gray-100 rounded-xl p-5 mb-4">
-                        <p className="text-sm font-medium text-gray-700 uppercase tracking-widest mb-4">
+                    <div className="bg-base-100 border shadow-md border-gray-100 rounded-lg p-5 mb-4">
+                        <p className="text-sm font-medium text-base-content/60 uppercase tracking-widest mb-4">
                             Donor details
                         </p>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
                             {/* Donor name */}
                             <div className="flex items-center gap-3 py-3">
                                 <svg
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     stroke="currentColor"
                                     fill="currentColor"
                                     stroke-width="0"
@@ -355,10 +364,10 @@ const BloodDonationDetails = () => {
                                     <path d="M4 21h9.62a3.995 3.995 0 0 0 3.037-1.397l5.102-5.952a1 1 0 0 0-.442-1.6l-1.968-.656a3.043 3.043 0 0 0-2.823.503l-3.185 2.547-.617-1.235A3.98 3.98 0 0 0 9.146 11H4c-1.103 0-2 .897-2 2v6c0 1.103.897 2 2 2zm0-8h5.146c.763 0 1.448.423 1.789 1.105l.447.895H7v2h6.014a.996.996 0 0 0 .442-.11l.003-.001.004-.002h.003l.002-.001h.004l.001-.001c.009.003.003-.001.003-.001.01 0 .002-.001.002-.001h.001l.002-.001.003-.001.002-.001.002-.001.003-.001.002-.001c.003 0 .001-.001.002-.001l.003-.002.002-.001.002-.001.003-.001.002-.001h.001l.002-.001h.001l.002-.001.002-.001c.009-.001.003-.001.003-.001l.002-.001a.915.915 0 0 0 .11-.078l4.146-3.317c.262-.208.623-.273.94-.167l.557.186-4.133 4.823a2.029 2.029 0 0 1-1.52.688H4v-6zM16 2h-.017c-.163.002-1.006.039-1.983.705-.951-.648-1.774-.7-1.968-.704L12.002 2h-.004c-.801 0-1.555.313-2.119.878C9.313 3.445 9 4.198 9 5s.313 1.555.861 2.104l3.414 3.586a1.006 1.006 0 0 0 1.45-.001l3.396-3.568C18.688 6.555 19 5.802 19 5s-.313-1.555-.878-2.121A2.978 2.978 0 0 0 16.002 2H16zm1 3c0 .267-.104.518-.311.725L14 8.55l-2.707-2.843C11.104 5.518 11 5.267 11 5s.104-.518.294-.708A.977.977 0 0 1 11.979 4c.025.001.502.032 1.067.485.081.065.163.139.247.222l.707.707.707-.707c.084-.083.166-.157.247-.222.529-.425.976-.478 1.052-.484a.987.987 0 0 1 .701.292c.189.189.293.44.293.707z"></path>
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Donor name
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.donorName}
                                     </p>
                                 </div>
@@ -367,7 +376,7 @@ const BloodDonationDetails = () => {
                             {/* Donor email */}
                             <div className="flex items-center gap-3 py-3">
                                 <svg
-                                    className="w-4 h-4 text-gray-700 shrink-0"
+                                    className="w-4 h-4 text-base-content/60 shrink-0"
                                     stroke="currentColor"
                                     fill="currentColor"
                                     stroke-width="0"
@@ -381,10 +390,10 @@ const BloodDonationDetails = () => {
                                     <path d="M12 1.95c-5.52 0-10 4.48-10 10s4.48 10 10 10h5v-2h-5c-4.34 0-8-3.66-8-8s3.66-8 8-8 8 3.66 8 8v1.43c0 .79-.71 1.57-1.5 1.57s-1.5-.78-1.5-1.57v-1.43c0-2.76-2.24-5-5-5s-5 2.24-5 5 2.24 5 5 5c1.38 0 2.64-.56 3.54-1.47.65.89 1.77 1.47 2.96 1.47 1.97 0 3.5-1.6 3.5-3.57v-1.43c0-5.52-4.48-10-10-10zm0 13c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"></path>
                                 </svg>
                                 <div>
-                                    <p className="text-[12px] text-gray-700">
+                                    <p className="text-[12px] text-base-content/60">
                                         Donor name
                                     </p>
-                                    <p className="text-sm font-medium text-gray-800">
+                                    <p className="text-sm font-medium text-base-content">
                                         {donationDetails?.donorEmail}
                                     </p>
                                 </div>
@@ -394,14 +403,14 @@ const BloodDonationDetails = () => {
                 )}
 
                 {/* Request message card */}
-                <div className="bg-white border border-gray-100 rounded-xl shadow-sm p-5 mb-4">
-                    <p className="text-sm font-medium text-gray-700 uppercase tracking-widest mb-4">
+                <div className="bg-base-100 border border-gray-100 rounded-lg shadow-md p-5 mb-4">
+                    <p className="text-sm font-medium text-base-content/60 uppercase tracking-widest mb-4">
                         Request message
                     </p>
-                    <p className="text-sm text-gray-700 bg-gray-50 rounded-lg px-4 py-3 leading-relaxed">
+                    <p className="text-sm text-base-content/60 bg-base-200 rounded-lg px-4 py-3 leading-relaxed">
                         {donationDetails?.requestMessage}
                     </p>
-                    <div className="flex items-center gap-1.5 mt-4 text-xs text-gray-700">
+                    <div className="flex items-center gap-1.5 mt-4 text-xs text-base-content/60">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="w-3.5 h-3.5"
@@ -417,7 +426,7 @@ const BloodDonationDetails = () => {
                             <circle cx="12" cy="12" r="10" />
                         </svg>
                         Posted by {donationDetails?.requesterName}
-                        <span className="text-gray-700">
+                        <span className="text-base-content/60">
                             <GoDotFill className="" />
                         </span>
                         {formatDate(donationDetails?.createdAt)}
@@ -428,7 +437,7 @@ const BloodDonationDetails = () => {
                 {status === "pending" && (
                     <button
                         onClick={openModal}
-                        className={`text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-12 hover:opacity-85 w-full mt-6 py-3.5 flex items-center justify-center gap-2 border transition-opacity`}>
+                        className={`text-lg text-white font-semibold rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] h-12 hover:opacity-85 w-full mt-6 py-3.5 flex items-center justify-center gap-2 border transition-opacity`}>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             className="w-5 h-5"

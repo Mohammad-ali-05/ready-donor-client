@@ -20,7 +20,7 @@ const DashboardLayout = () => {
                 <NavLink
                     to={"/dashboard/my-dashboard"}
                     className={({ isActive }) =>
-                        `text-[16px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-black"}`
+                        `text-[16px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-base-content"}`
                     }>
                     <button
                         className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -48,7 +48,7 @@ const DashboardLayout = () => {
                 <NavLink
                     to={"/dashboard/profile"}
                     className={({ isActive }) =>
-                        `text-[16px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-black"}`
+                        `text-[16px] font-semibold hover:text-[#8d1f3a] ${isActive ? "text-[#8d1f3a] border-b-2" : "text-base-content"}`
                     }>
                     <button
                         className="flex items-center gap-2 is-drawer-close:tooltip is-drawer-close:tooltip-right"
@@ -71,7 +71,7 @@ const DashboardLayout = () => {
                                 `text-[16px] font-semibold hover:text-[#8d1f3a] ${
                                     isActive
                                         ? "text-[#8d1f3a] border-b-2"
-                                        : "text-black"
+                                        : "text-base-content"
                                 }`
                             }>
                             <button
@@ -106,7 +106,7 @@ const DashboardLayout = () => {
                                 `text-[16px] font-semibold hover:text-[#8d1f3a] ${
                                     isActive
                                         ? "text-[#8d1f3a] border-b-2"
-                                        : "text-black"
+                                        : "text-base-content"
                                 }`
                             }>
                             <button
@@ -140,7 +140,7 @@ const DashboardLayout = () => {
                                 `text-[16px] font-semibold hover:text-[#8d1f3a] ${
                                     isActive
                                         ? "text-[#8d1f3a] border-b-2"
-                                        : "text-black"
+                                        : "text-base-content"
                                 }`
                             }>
                             <button
@@ -164,7 +164,7 @@ const DashboardLayout = () => {
                                 `text-[16px] font-semibold hover:text-[#8d1f3a] ${
                                     isActive
                                         ? "text-[#8d1f3a] border-b-2"
-                                        : "text-black"
+                                        : "text-base-content"
                                 }`
                             }>
                             <button
@@ -216,7 +216,7 @@ const DashboardLayout = () => {
                         </label>
                     </nav>
                     {/* Page content here */}
-                    <div className="py-20 bg-gray-50">
+                    <div className="py-20 bg-base-200">
                         <div className="max-w-7xl min-h-[calc(100vh-64px)] mx-auto px-4 sm:px-6 lg:px-8">
                             <Outlet></Outlet>
                         </div>

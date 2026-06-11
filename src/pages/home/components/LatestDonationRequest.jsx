@@ -40,14 +40,14 @@ const LatestDonationRequest = () => {
     }, [axios]);
 
     return (
-        <section className="bg-white py-20">
+        <section className="bg-base-100 py-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div>
                     <div className="mb-8">
-                        <h1 className="text-gray-900 text-2xl font-semibold md:text-3xl text-center mb-5">
+                        <h1 className="text-base-content text-2xl font-semibold md:text-3xl text-center mb-5">
                             Find Latest Donation Requests
                         </h1>
-                        <p className="md:text-lg font-medium text-gray-600 max-w-250 w-full text-center mx-auto">
+                        <p className="md:text-lg font-medium text-base-content/60 max-w-250 w-full text-center mx-auto">
                             Explore the latest blood donation requests submitted
                             by patients and families in need. Find requests that
                             match your blood group and location, and help make a
@@ -56,11 +56,11 @@ const LatestDonationRequest = () => {
                     </div>
                 </div>
                 {isLoading ? (
-                    <div className="bg-white flex justify-center items-center shadow-lg rounded-xl py-40">
+                    <div className="bg-base-100 flex justify-center items-center shadow-md rounded-lg py-40">
                         <Loading></Loading>
                     </div>
                 ) : latestDonations.length ? (
-                    <div className="px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                    <div className="px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {latestDonations?.map((donation) => (
                             <DonationCard
                                 key={donation._id}
@@ -70,7 +70,7 @@ const LatestDonationRequest = () => {
                     </div>
                 ) : (
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-                        <p className="bg-white rounded-xl shadow-sm p-6 mb-8 text-center py-30 text-gray-500">
+                        <p className="bg-base-100 rounded-lg shadow-md p-6 mb-8 text-center py-30 text-base-content/50">
                             No donation requests found
                         </p>
                     </div>

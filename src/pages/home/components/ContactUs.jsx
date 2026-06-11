@@ -4,14 +4,14 @@ import { MdOutlineMail } from "react-icons/md";
 
 const ContactUs = () => {
     return (
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-base-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-40">
                     <div className="flex flex-col justify-center items-start">
-                        <h2 className="text-4xl md:text-5xl text-center lg:text-left font-bold mb-6">
+                        <h2 className="text-2xl md:text-3xl text-center lg:text-left font-semibold mb-6">
                             Contact Us
                         </h2>
-                        <p className="text-lg text-gray-700 font-medium mb-8">
+                        <p className="text-lg text-base-content/60 font-medium mb-8">
                             A single donor can become someone’s hero. Reach out
                             to us anytime for support, donation guidance, or
                             emergency assistance. Together, we can make a
@@ -29,7 +29,7 @@ const ContactUs = () => {
                         </div>
                     </div>
                     <div>
-                        <div className="card bg-base-100 w-full shadow-2xl">
+                        <div className="card bg-base-100  w-full shadow-md">
                             <div className="card-body">
                                 <form>
                                     <fieldset className="fieldset space-y-4">
@@ -62,7 +62,7 @@ const ContactUs = () => {
                                                 name="message"
                                                 placeholder="Write your message..."></textarea>
                                         </div>
-                                        <button className="text-lg text-white font-semibold bg-linear-to-r rounded-md from-[#B32346] to-[#46052D] h-10 px-4 hover:opacity-85">
+                                        <button className="text-lg text-white font-semibold bg-linear-to-r rounded-lg from-[#B32346] to-[#46052D] h-10 px-4 hover:opacity-85">
                                             Contact Us
                                         </button>
                                     </fieldset>

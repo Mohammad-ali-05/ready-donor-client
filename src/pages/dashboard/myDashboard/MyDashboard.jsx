@@ -16,7 +16,7 @@ const MyDashboard = () => {
 
     return (
         <div>
-            <div className="bg-gradient-to-r from-[#B32346] p-6 to-[#46052D] text-white rounded-lg mb-15 shadow-sm">
+            <div className="bg-gradient-to-r from-[#B32346] p-6 to-[#46052D] text-white rounded-lg mb-15 shadow-md">
                 <h1 className="text-2xl font-bold">Welcome Back👋</h1>
                 <p className="text-2xl font-bold"> {user.displayName}</p>
             </div>

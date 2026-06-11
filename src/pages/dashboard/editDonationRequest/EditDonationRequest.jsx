@@ -224,7 +224,7 @@ const EditDonationRequest = () => {
             )}
             <form
                 onSubmit={handleSubmit(handleUpdateDonation)}
-                className={`card-body p-6 rounded-lg shadow-xl ${loadingData && "hidden"}`}>
+                className={`card-body p-6 rounded-lg shadow-md bg-base-100 ${loadingData && "hidden"}`}>
                 <div className="flex justify-between items-center">
                     <legend className="text-xl font-semibold mb-4">
                         Edit Donation Requests
@@ -232,7 +232,7 @@ const EditDonationRequest = () => {
                     <button
                         onClick={() => navigate(-1)}
                         type="button"
-                        className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] px-4 py-1 hover:opacity-85">
+                        className="text-lg text-white font-semibold rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] px-4 py-1 hover:opacity-85">
                         Go Back
                     </button>
                 </div>
@@ -241,7 +241,7 @@ const EditDonationRequest = () => {
                     {/* requester name */}
                     <label
                         htmlFor="requesterName"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Requester Name *
                     </label>
                     <input
@@ -250,7 +250,7 @@ const EditDonationRequest = () => {
                         })}
                         type="text"
                         readOnly
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.requesterName && (
                         <p className="text-red-500 text-sm mt-1">
@@ -261,7 +261,7 @@ const EditDonationRequest = () => {
                     {/* requester email */}
                     <label
                         htmlFor="requesterEmail"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Requester Email *
                     </label>
                     <input
@@ -274,7 +274,7 @@ const EditDonationRequest = () => {
                         })}
                         type="email"
                         readOnly
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.requesterEmail && (
                         <p className="text-red-500 text-sm mt-1">
@@ -285,7 +285,7 @@ const EditDonationRequest = () => {
                     {/* recipient name */}
                     <label
                         htmlFor="recipientName"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Recipient Name *
                     </label>
                     <input
@@ -299,7 +299,7 @@ const EditDonationRequest = () => {
                         })}
                         type="text"
                         placeholder="Enter recipient full name"
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.recipientName && (
                         <p className="text-red-500 text-sm mt-1">
@@ -308,14 +308,14 @@ const EditDonationRequest = () => {
                     )}
 
                     {/* blood type */}
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-base-content/60">
                         Blood type *
                     </label>
                     <select
                         {...register("bloodGroup", {
                             required: "Blood group is required",
                         })}
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">All Blood Types</option>
                         {bloodCategory.map((category, index) => (
                             <option key={index} value={category}>
@@ -333,14 +333,14 @@ const EditDonationRequest = () => {
                 {/* Recipient location */}
                 <fieldset className="fieldset">
                     {/* Division */}
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-base-content/60">
                         Recipient Division *
                     </label>
                     <select
                         {...register("recipientDivision", {
                             required: "Division is required",
                         })}
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">Select Division</option>
                         {divisionData.map((division) => (
                             <option
@@ -357,14 +357,14 @@ const EditDonationRequest = () => {
                     )}
 
                     {/* District */}
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-base-content/60">
                         Recipient District *
                     </label>
                     <select
                         {...register("recipientDistrict", {
                             required: "District is required",
                         })}
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">Select District</option>
                         {districts.map((district) => (
                             <option
@@ -381,14 +381,14 @@ const EditDonationRequest = () => {
                     )}
 
                     {/* Upazila */}
-                    <label className="text-sm font-medium text-gray-700">
+                    <label className="text-sm font-medium text-base-content/60">
                         Recipient Upazila *
                     </label>
                     <select
                         {...register("recipientUpazila", {
                             required: "Upazila is required",
                         })}
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">Select Upazila</option>
                         {upazilas.map((upazila) => (
                             <option
@@ -410,7 +410,7 @@ const EditDonationRequest = () => {
                     {/* hospital name */}
                     <label
                         htmlFor="hospitalName"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Hospital Name *
                     </label>
                     <input
@@ -424,7 +424,7 @@ const EditDonationRequest = () => {
                         })}
                         type="text"
                         placeholder="Enter hospital name"
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.hospitalName && (
                         <p className="text-red-500 text-sm mt-1">
@@ -435,7 +435,7 @@ const EditDonationRequest = () => {
                     {/* full address */}
                     <label
                         htmlFor="fullAddress"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Full Address Line *
                     </label>
                     <input
@@ -449,7 +449,7 @@ const EditDonationRequest = () => {
                         })}
                         type="text"
                         placeholder="Enter full address"
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.fullAddress && (
                         <p className="text-red-500 text-sm mt-1">
@@ -460,7 +460,7 @@ const EditDonationRequest = () => {
                     {/* donation date */}
                     <label
                         htmlFor="donationDate"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Donation Date *
                     </label>
                     <input
@@ -468,7 +468,7 @@ const EditDonationRequest = () => {
                             required: "Donation date is required",
                         })}
                         type="date"
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.donationDate && (
                         <p className="text-red-500 text-sm mt-1">
@@ -479,7 +479,7 @@ const EditDonationRequest = () => {
                     {/* donation time */}
                     <label
                         htmlFor="donationTime"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Donation Time *
                     </label>
                     <input
@@ -487,7 +487,7 @@ const EditDonationRequest = () => {
                             required: "Donation time is required",
                         })}
                         type="time"
-                        className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                        class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                     />
                     {errors.donationTime && (
                         <p className="text-red-500 text-sm mt-1">
@@ -498,7 +498,7 @@ const EditDonationRequest = () => {
                     {/* request message */}
                     <label
                         htmlFor="requestMessage"
-                        className="text-sm font-medium text-gray-700">
+                        className="text-sm font-medium text-base-content/60">
                         Request Message *
                     </label>
                     <textarea
@@ -511,7 +511,7 @@ const EditDonationRequest = () => {
                             },
                         })}
                         placeholder="Write why you need blood in details"
-                        className="textarea w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none min-h-28"
+                        className="textarea w-full bg-base-200 text-base-content text-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-base-300 min-h-28 disabled:opacity-50"
                     />
                     {errors.requestMessage && (
                         <p className="text-red-500 text-sm mt-1">
@@ -522,7 +522,7 @@ const EditDonationRequest = () => {
 
                 <button
                     type="submit"
-                    className="text-lg text-white font-semibold rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
+                    className="text-lg text-white font-semibold rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
                     Update Donation
                 </button>
             </form>

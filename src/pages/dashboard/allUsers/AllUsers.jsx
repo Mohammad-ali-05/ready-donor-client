@@ -156,7 +156,7 @@ const AllUsers = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md">
+        <div className="bg-base-100 p-6 rounded-lg shadow-md">
             {/* Header */}
             <h2 className="text-xl font-semibold mb-4">
                 All Users{" "}
@@ -172,7 +172,7 @@ const AllUsers = () => {
                     <button
                         key={status}
                         onClick={() => handleStatusFilter(status)}
-                        className={`px-4 py-2 rounded-md border text-sm capitalize ${
+                        className={`px-4 py-2 rounded-lg border text-sm capitalize ${
                             statusFilter === status
                                 ? "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"
                                 : "hover:text-white hover:bg-linear-to-r hover:from-[#B32346] hover:to-[#46052D]"
@@ -190,7 +190,7 @@ const AllUsers = () => {
                 <>
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm">
-                            <thead className="bg-gray-100 text-left">
+                            <thead className="bg-base-200 text-left">
                                 <tr>
                                     <th className="p-3">Avatar</th>
                                     <th className="p-3">Name</th>
@@ -205,7 +205,7 @@ const AllUsers = () => {
                                 {allUsers.map((user) => (
                                     <tr
                                         key={user._id}
-                                        className="border-t hover:bg-gray-50 transition">
+                                        className="border-t hover:bg-base-200 transition">
                                         {/* Avatar */}
                                         <td className="p-3">
                                             <img
@@ -226,7 +226,7 @@ const AllUsers = () => {
                                         {/* Role */}
                                         <td className="p-3">
                                             <span
-                                                className={`px-2 py-1 text-xs rounded font-medium ${
+                                                className={`px-2 py-1 text-xs rounded-lg font-medium ${
                                                     user.role === "admin"
                                                         ? "bg-purple-100 text-purple-700"
                                                         : user.role ===
@@ -241,7 +241,7 @@ const AllUsers = () => {
                                         {/* Status */}
                                         <td className="p-3">
                                             <span
-                                                className={`px-2 py-1 text-xs rounded font-medium ${
+                                                className={`px-2 py-1 text-xs rounded-lg font-medium ${
                                                     user.status === "active"
                                                         ? "bg-green-100 text-green-700"
                                                         : "bg-red-100 text-red-700"
@@ -262,7 +262,7 @@ const AllUsers = () => {
 
                                                 <ul
                                                     tabIndex={0}
-                                                    className="dropdown-content menu bg-base-100 rounded-box z-50 w-52 p-2 shadow border">
+                                                    className="dropdown-content menu bg-base-100  rounded-lg z-50 w-52 p-2 shadow border">
                                                     {/* Make Volunteer */}
                                                     {user.role === "donor" && (
                                                         <li>
@@ -334,7 +334,7 @@ const AllUsers = () => {
                                     <tr>
                                         <td
                                             colSpan="6"
-                                            className="text-center py-20 text-gray-500">
+                                            className="text-center py-20 text-base-content/50">
                                             No users found
                                         </td>
                                     </tr>
@@ -360,7 +360,7 @@ const AllUsers = () => {
                                 <button
                                     key={i}
                                     onClick={() => setCurrentPage(i)}
-                                    className={`btn rounded-md ${
+                                    className={`btn rounded-lg ${
                                         currentPage === i
                                             ? "text-white bg-linear-to-r from-[#B32346] to-[#46052D] hover:opacity-85"
                                             : ""

@@ -48,6 +48,11 @@ const routes = createBrowserRouter([
                 path: "blood-donations",
                 element: <BloodDonations></BloodDonations>,
             },
+
+            {
+                path: "blood-donations/details/:id",
+                element: <BloodDonationDetails></BloodDonationDetails>,
+            },
             {
                 path: "funding",
                 element: (
@@ -90,15 +95,6 @@ const routes = createBrowserRouter([
                         element: (
                             <RoleRoute allowedRoles={["admin", "donor"]}>
                                 <EditDonationRequest></EditDonationRequest>
-                            </RoleRoute>
-                        ),
-                    },
-                    {
-                        path: "blood-donation/details/:id",
-                        element: (
-                            <RoleRoute
-                                allowedRoles={["admin", "donor", "volunteer"]}>
-                                <BloodDonationDetails></BloodDonationDetails>
                             </RoleRoute>
                         ),
                     },

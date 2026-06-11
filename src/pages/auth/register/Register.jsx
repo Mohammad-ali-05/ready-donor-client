@@ -173,9 +173,9 @@ const Register = () => {
     };
 
     return (
-        <section className="relative bg-linear-to-br  from-red-50 to-red-100 py-20">
+        <section className="bg-linear-to-br from-error/10 to-error/20 py-20">
             <div className="flex justify-center items-center max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="card bg-base-100 w-full max-w-lg shrink-0 p-6">
+                <div className="card bg-base-100  w-full max-w-lg shrink-0 p-6">
                     <div className="text-center mb-6">
                         <h2 className="text-2xl mb-2">Join Save Lives</h2>
                         <p className="text-[#717182] text-sm">
@@ -191,7 +191,7 @@ const Register = () => {
                             {/* name */}
                             <label
                                 htmlFor="name"
-                                className="text-sm font-medium text-gray-700">
+                                className="text-sm font-medium text-base-content/60">
                                 Full Name *
                             </label>
                             <input
@@ -205,7 +205,7 @@ const Register = () => {
                                 })}
                                 type="text"
                                 placeholder="Enter your full name"
-                                className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                             />
                             {errors.name && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -216,7 +216,7 @@ const Register = () => {
                             {/* email */}
                             <label
                                 htmlFor="email"
-                                className="text-sm font-medium text-gray-700">
+                                className="text-sm font-medium text-base-content/60">
                                 Email *
                             </label>
                             <input
@@ -229,7 +229,7 @@ const Register = () => {
                                 })}
                                 type="email"
                                 placeholder="Enter your full email"
-                                className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                             />
                             {errors.email && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -238,7 +238,7 @@ const Register = () => {
                             )}
 
                             {/* image */}
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium text-base-content/60">
                                 Image *
                             </label>
                             <input
@@ -246,7 +246,7 @@ const Register = () => {
                                     required: "Image is required",
                                 })}
                                 type="file"
-                                className="file-input file-input-bordered h-9 w-full bg-gray-100 border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
+                                className="file-input file-input-bordered h-9 w-full bg-base-200 border-gray-300 text-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
                             />
                             {errors.image && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -255,7 +255,7 @@ const Register = () => {
                             )}
 
                             {/* blood type */}
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium text-base-content/60">
                                 Blood type *
                             </label>
                             <select
@@ -263,7 +263,7 @@ const Register = () => {
                                     required: "Blood group is required",
                                 })}
                                 defaultValue=""
-                                className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                                 <option value="">All Blood Types</option>
                                 {bloodCategory.map((category, index) => (
                                     <option key={index} value={category}>
@@ -281,7 +281,7 @@ const Register = () => {
                         <fieldset className="fieldset">
                             {/* Division */}
 
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium text-base-content/60">
                                 Division *
                             </label>
                             <select
@@ -289,7 +289,7 @@ const Register = () => {
                                     required: "Division is required",
                                 })}
                                 defaultValue=""
-                                className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                                 <option value="">Select Division</option>
                                 {divisionData.map((division) => (
                                     <option
@@ -306,7 +306,7 @@ const Register = () => {
                             )}
 
                             {/* District */}
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium text-base-content/60">
                                 District *
                             </label>
                             <select
@@ -314,7 +314,7 @@ const Register = () => {
                                     required: "District is required",
                                 })}
                                 defaultValue=""
-                                className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                                 <option value="">Select District</option>
                                 {districts.map((district) => (
                                     <option
@@ -331,7 +331,7 @@ const Register = () => {
                             )}
 
                             {/* Upazila */}
-                            <label className="text-sm font-medium text-gray-700">
+                            <label className="text-sm font-medium text-base-content/60">
                                 Upazila *
                             </label>
                             <select
@@ -339,7 +339,7 @@ const Register = () => {
                                     required: "Upazila is required",
                                 })}
                                 defaultValue=""
-                                className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                                className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                                 <option value="">Select Upazila</option>
                                 {upazilas.map((upazila) => (
                                     <option
@@ -360,7 +360,7 @@ const Register = () => {
                             {/*Create Password */}
                             <label
                                 htmlFor="password"
-                                className="text-sm font-medium text-gray-700">
+                                className="text-sm font-medium text-base-content/60">
                                 Password *
                             </label>
                             <input
@@ -379,7 +379,7 @@ const Register = () => {
                                 })}
                                 type="password"
                                 placeholder="Create your password"
-                                className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                             />
                             {errors.password && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -390,7 +390,7 @@ const Register = () => {
                             {/*Confirm Password */}
                             <label
                                 htmlFor="confirmPassword"
-                                className="text-sm font-medium text-gray-700">
+                                className="text-sm font-medium text-base-content/60">
                                 Confirm Password *
                             </label>
                             <input
@@ -402,7 +402,7 @@ const Register = () => {
                                 })}
                                 type="password"
                                 placeholder="Confirm your password"
-                                className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none focus:ring-2 focus:ring-gray-300 focus:border-gray-300 disabled:opacity-50"
+                                class="input w-full bg-base-200 text-base-content text-sm disabled:opacity-50"
                             />
                             {errors.confirmPassword && (
                                 <p className="text-red-500 text-sm mt-1">
@@ -410,12 +410,12 @@ const Register = () => {
                                 </p>
                             )}
                         </fieldset>
-                        <button className="text-lg text-white font-semibold  rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
+                        <button className="text-lg text-white font-semibold  rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
                             Register
                         </button>
                     </form>
                     <Link to={"/auth/login"} state={location?.state}>
-                        <div className="text-center text-sm font-medium text-gray-700 mt-4">
+                        <div className="text-center text-sm font-medium text-base-content/60 mt-4">
                             Already have an account?{" "}
                             <button
                                 type="button"

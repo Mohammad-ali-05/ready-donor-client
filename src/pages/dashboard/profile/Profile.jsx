@@ -22,7 +22,7 @@ const Profile = () => {
     return (
         <section className="space-y-6">
             {/* Profile Header */}
-            <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="bg-base-100 rounded-lg shadow-md p-6">
                 <div className="flex flex-col md:flex-row items-center gap-6">
                     <img
                         src={dbUser.image}
@@ -33,7 +33,7 @@ const Profile = () => {
                     <div className="flex-1 text-center md:text-left">
                         <h1 className="text-3xl font-bold">{dbUser.name}</h1>
 
-                        <p className="text-gray-500 mt-1">
+                        <p className="text-base-content/50 mt-1">
                             Blood Donor Profile
                         </p>
 
@@ -56,50 +56,52 @@ const Profile = () => {
             </div>
 
             {/* Personal Information */}
-            <div className="bg-white rounded-2xl shadow-md p-6">
+            <div className="bg-base-100 rounded-lg shadow-md p-6">
                 <h2 className="text-2xl font-bold mb-6">
                     Personal Information
                 </h2>
 
                 <div className="grid md:grid-cols-2 gap-6">
                     <div>
-                        <p className="text-sm text-gray-500">Email</p>
+                        <p className="text-sm text-base-content/50">Email</p>
 
                         <p className="font-medium">{dbUser.email}</p>
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">Blood Group</p>
+                        <p className="text-sm text-base-content/50">
+                            Blood Group
+                        </p>
 
                         <p className="font-medium">{dbUser.bloodGroup}</p>
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">Division</p>
+                        <p className="text-sm text-base-content/50">Division</p>
 
                         <p className="font-medium">{dbUser.divisionName}</p>
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">District</p>
+                        <p className="text-sm text-base-content/50">District</p>
 
                         <p className="font-medium">{dbUser.districtName}</p>
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">Upazila</p>
+                        <p className="text-sm text-base-content/50">Upazila</p>
 
                         <p className="font-medium">{dbUser.upazilaName}</p>
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">Role</p>
+                        <p className="text-sm text-base-content/50">Role</p>
 
                         <p className="font-medium capitalize">{dbUser.role}</p>
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">Status</p>
+                        <p className="text-sm text-base-content/50">Status</p>
 
                         <p className="font-medium capitalize">
                             {dbUser.status}
@@ -107,7 +109,7 @@ const Profile = () => {
                     </div>
 
                     <div>
-                        <p className="text-sm text-gray-500">Joined</p>
+                        <p className="text-sm text-base-content/50">Joined</p>
 
                         <p className="font-medium">
                             {new Date(dbUser.createdAt).toLocaleDateString()}
@@ -132,26 +134,26 @@ export default Profile;
 
                     //  Donation Statistics 
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                <div className="bg-red-50 rounded-2xl p-5">
-                    <h3 className="text-gray-500 text-sm">Total Requests</h3>
+                <div className="bg-red-50 rounded-lg p-5">
+                    <h3 className="text-base-content/50 text-sm">Total Requests</h3>
 
                     <p className="text-3xl font-bold mt-2">15</p>
                 </div>
 
-                <div className="bg-yellow-50 rounded-2xl p-5">
-                    <h3 className="text-gray-500 text-sm">Pending</h3>
+                <div className="bg-yellow-50 rounded-lg p-5">
+                    <h3 className="text-base-content/50 text-sm">Pending</h3>
 
                     <p className="text-3xl font-bold mt-2">5</p>
                 </div>
 
-                <div className="bg-blue-50 rounded-2xl p-5">
-                    <h3 className="text-gray-500 text-sm">In Progress</h3>
+                <div className="bg-blue-50 rounded-lg p-5">
+                    <h3 className="text-base-content/50 text-sm">In Progress</h3>
 
                     <p className="text-3xl font-bold mt-2">2</p>
                 </div>
 
-                <div className="bg-green-50 rounded-2xl p-5">
-                    <h3 className="text-gray-500 text-sm">Completed</h3>
+                <div className="bg-green-50 rounded-lg p-5">
+                    <h3 className="text-base-content/50 text-sm">Completed</h3>
 
                     <p className="text-3xl font-bold mt-2">8</p>
                 </div>

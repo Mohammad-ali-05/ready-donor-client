@@ -131,7 +131,7 @@ const DonorLatestRequest = () => {
     };
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-lg text-black">
+        <div className="bg-base-100 p-6 rounded-lg shadow-md text-base-content">
             <h2 className="text-xl font-semibold mb-4">
                 Recent Donation Requests 🩸
             </h2>
@@ -143,7 +143,7 @@ const DonorLatestRequest = () => {
             ) : (
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm">
-                        <thead className="bg-gray-100 text-left">
+                        <thead className="bg-base-200 text-left">
                             <tr>
                                 <th className="p-3">Recipient</th>
                                 <th className="p-3">Location</th>
@@ -178,7 +178,7 @@ const DonorLatestRequest = () => {
                                     {/* Status */}
                                     <td className="p-3">
                                         <span
-                                            className={`px-2 py-1 text-xs rounded ${
+                                            className={`px-2 py-1 text-xs rounded-lg ${
                                                 req.status === "pending"
                                                     ? "bg-yellow-100 text-yellow-700"
                                                     : req.status ===
@@ -196,7 +196,7 @@ const DonorLatestRequest = () => {
                                     <td className="p-3">
                                         {req.status === "inprogress" ||
                                         req.status === "done" ? (
-                                            <div className="text-sm text-gray-500 mt-1">
+                                            <div className="text-sm text-base-content/50 mt-1">
                                                 <p>
                                                     <span className="font-semibold">
                                                         Donor Name:
@@ -215,7 +215,7 @@ const DonorLatestRequest = () => {
                                                 {"Request has been canceled"}
                                             </div>
                                         ) : (
-                                            <div className="text-xs text-gray-500 mt-1">
+                                            <div className="text-xs text-base-content/50 mt-1">
                                                 {"No donor found"}
                                             </div>
                                         )}
@@ -225,9 +225,9 @@ const DonorLatestRequest = () => {
                                     <td className="p-3 grid grid-cols-1 lg:grid-cols-2 gap-2">
                                         {/* View */}
                                         <Link
-                                            to={`/dashboard/blood-donation/details/${req._id}`}
+                                            to={`/blood-donations/details/${req._id}`}
                                             className="col-span-2">
-                                            <button className="px-2 py-1 w-full text-xs bg-gray-100 rounded">
+                                            <button className="px-2 py-1 w-full text-xs bg-base-200 rounded-lg">
                                                 View
                                             </button>
                                         </Link>
@@ -235,7 +235,7 @@ const DonorLatestRequest = () => {
                                         {/* Edit */}
                                         <Link
                                             to={`/dashboard/my-donation-requests/edit/${req._id}`}>
-                                            <button className="px-2 w-full py-1 text-xs bg-blue-100 text-blue-700 rounded">
+                                            <button className="px-2 w-full py-1 text-xs bg-blue-100 text-blue-700 rounded-lg">
                                                 Edit
                                             </button>
                                         </Link>
@@ -245,7 +245,7 @@ const DonorLatestRequest = () => {
                                             onClick={() =>
                                                 handleRequestDelete(req._id)
                                             }
-                                            className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
+                                            className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded-lg">
                                             Delete
                                         </button>
 
@@ -259,7 +259,7 @@ const DonorLatestRequest = () => {
                                                             "done",
                                                         )
                                                     }
-                                                    className="px-2 py-1 w-full text-xs bg-green-100 text-green-700 rounded">
+                                                    className="px-2 py-1 w-full text-xs bg-green-100 text-green-700 rounded-lg">
                                                     Done
                                                 </button>
 
@@ -270,7 +270,7 @@ const DonorLatestRequest = () => {
                                                             "canceled",
                                                         )
                                                     }
-                                                    className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded">
+                                                    className="px-2 py-1 w-full text-xs bg-red-100 text-red-700 rounded-lg">
                                                     Cancel
                                                 </button>
                                             </>
@@ -282,7 +282,7 @@ const DonorLatestRequest = () => {
                                 <tr>
                                     <td
                                         colSpan={"8"}
-                                        className="text-center py-20 text-gray-500">
+                                        className="text-center py-20 text-base-content/50">
                                         No donation requests found
                                     </td>
                                 </tr>
@@ -295,7 +295,7 @@ const DonorLatestRequest = () => {
             {/* View All Button */}
             <div className="mt-4 text-right">
                 <Link to={"/dashboard/my-donation-requests"}>
-                    <button className="py-2 text-lg text-white font-semibold bg-linear-to-r rounded-md from-[#B32346] to-[#46052D] px-4 hover:opacity-85 ">
+                    <button className="py-2 text-lg text-white font-semibold bg-linear-to-r rounded-lg from-[#B32346] to-[#46052D] px-4 hover:opacity-85 ">
                         View My All Requests
                     </button>
                 </Link>

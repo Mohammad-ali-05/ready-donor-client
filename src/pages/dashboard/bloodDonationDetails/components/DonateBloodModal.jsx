@@ -98,13 +98,13 @@ const DonateBloodModal = ({
         <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
                 {/* Summary */}
-                <p className="text-sm text-gray-700 leading-relaxed mb-5">
+                <p className="text-sm text-base-content/60 leading-relaxed mb-5">
                     You're about to commit to donating{" "}
                     <strong className="text-red-500 font-semibold">
                         {donationDetails?.bloodGroup}
                     </strong>{" "}
                     blood for{" "}
-                    <strong className="text-gray-700 font-semibold">
+                    <strong className="text-base-content/60 font-semibold">
                         {donationDetails?.recipientName}
                     </strong>{" "}
                     at {donationDetails?.hospitalName} on{" "}
@@ -117,7 +117,7 @@ const DonateBloodModal = ({
                         {/* name */}
                         <label
                             htmlFor="name"
-                            className="text-sm font-medium text-gray-700">
+                            className="text-sm font-medium text-base-content/60">
                             Donor Name *
                         </label>
                         {/* Name */}
@@ -125,7 +125,7 @@ const DonateBloodModal = ({
                             {...register("name")}
                             type="text"
                             readOnly
-                            className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none"
+                            className="w-full h-9 px-3 rounded-lg border border-gray-300 bg-base-200 text-sm outline-none"
                         />
                         {errors.name && (
                             <p className="text-red-500 text-sm mt-1">
@@ -136,7 +136,7 @@ const DonateBloodModal = ({
                         {/* email */}
                         <label
                             htmlFor="email"
-                            className="text-sm font-medium text-gray-700">
+                            className="text-sm font-medium text-base-content/60">
                             Donor Email *
                         </label>
                         {/* Email */}
@@ -144,7 +144,7 @@ const DonateBloodModal = ({
                             {...register("email")}
                             type="email"
                             readOnly
-                            className="w-full h-9 px-3 rounded-md border border-gray-300 bg-gray-100 text-sm outline-none"
+                            className="w-full h-9 px-3 rounded-lg border border-gray-300 bg-base-200 text-sm outline-none"
                         />
                         {errors.email && (
                             <p className="text-red-500 text-sm mt-1">
@@ -152,7 +152,7 @@ const DonateBloodModal = ({
                             </p>
                         )}
                     </fieldset>
-                    <button className="text-lg text-white font-semibold  rounded-md bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
+                    <button className="text-lg text-white font-semibold  rounded-lg bg-linear-to-r from-[#B32346] to-[#46052D] h-10 hover:opacity-85 w-full mt-4">
                         Confirm blood donation
                     </button>
                 </form>

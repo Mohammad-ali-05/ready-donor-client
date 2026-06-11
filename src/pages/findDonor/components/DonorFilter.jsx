@@ -62,7 +62,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
     }, [axios, selectedDistrict, setValue]);
 
     const handleFilterDonor = async (data) => {
-        setIsLoading(true)
+        setIsLoading(true);
         /* Filter data */
         const { bloodGroup, donorDistrict, donorDivision, donorUpazila } = data;
 
@@ -85,11 +85,11 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
         setAllDonors(result.data.donors);
         setDonorCount(result.data.donorsCount);
         // console.log(result.data);
-        setIsLoading(false)
+        setIsLoading(false);
     };
 
     return (
-        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+        <div className="bg-base-100 rounded-lg shadow-md p-6 mb-8">
             <form
                 onSubmit={handleSubmit(handleFilterDonor)}
                 className="grid grid-cols-1 md:grid-cols-5 items-start gap-4">
@@ -100,7 +100,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
                             required: "Division is required",
                         })}
                         defaultValue=""
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">Select Division</option>
                         {divisionData.map((division) => (
                             <option
@@ -124,7 +124,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
                             required: "District is required",
                         })}
                         defaultValue=""
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">Select District</option>
                         {districts.map((district) => (
                             <option
@@ -148,7 +148,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
                             required: "Upazila is required",
                         })}
                         defaultValue=""
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">Select Upazila</option>
                         {upazilas.map((upazila) => (
                             <option
@@ -172,7 +172,7 @@ const DonorFilter = ({ setAllDonors, setDonorCount, setIsLoading }) => {
                             required: "Blood group is required",
                         })}
                         defaultValue=""
-                        className="select w-full bg-gray-100 rounded-lg border-none focus:border-none focus:shadow-none focus:outline-none">
+                        className="select w-full bg-base-200 text-base-content text-sm disabled:opacity-50 focus:ring-2 focus:ring-base-300">
                         <option value="">All Blood Types</option>
                         {bloodCategory.map((category, index) => (
                             <option key={index} value={category}>

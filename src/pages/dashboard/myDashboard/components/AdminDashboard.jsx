@@ -36,13 +36,13 @@ const AdminDashboard = () => {
     return (
         <div className="space-y-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between">
+                <div className="bg-base-100 border border-gray-100 rounded-lg p-5 shadow-md hover:shadow-md transition-all duration-200 flex items-center justify-between">
                     <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wide">
+                        <p className="text-xs text-base-content/50 uppercase tracking-wide">
                             Total Donors
                         </p>
 
-                        <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                        <h2 className="text-2xl font-bold text-base-content mt-1">
                             {totalDonors}
                         </h2>
                     </div>
@@ -52,13 +52,13 @@ const AdminDashboard = () => {
                     </div>
                 </div>
 
-                <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between">
+                <div className="bg-base-100 border border-gray-100 rounded-lg p-5 shadow-md hover:shadow-md transition-all duration-200 flex items-center justify-between">
                     <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wide">
+                        <p className="text-xs text-base-content/50 uppercase tracking-wide">
                             Total Funding
                         </p>
 
-                        <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                        <h2 className="text-2xl font-bold text-base-content mt-1">
                             ৳{"50000"}fake data
                         </h2>
                     </div>
@@ -68,13 +68,13 @@ const AdminDashboard = () => {
                     </div>
                 </div>
 
-                <div className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md transition-all duration-200 flex items-center justify-between">
+                <div className="bg-base-100 border border-gray-100 rounded-lg p-5 shadow-md hover:shadow-md transition-all duration-200 flex items-center justify-between">
                     <div>
-                        <p className="text-xs text-gray-500 uppercase tracking-wide">
+                        <p className="text-xs text-base-content/50 uppercase tracking-wide">
                             Blood Donation Requests
                         </p>
 
-                        <h2 className="text-2xl font-bold text-gray-900 mt-1">
+                        <h2 className="text-2xl font-bold text-base-content mt-1">
                             {totalDonations}
                         </h2>
                     </div>
